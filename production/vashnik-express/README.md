@@ -4,6 +4,8 @@ Version courte du guide (§9 de `GUIDE_VASHNIK_MYTHIQUE_SCRIPT_VIDEO.md`) : 2 mi
 30 i/s, présentée par Gideon. La charte (couleurs, polices, encart télé, plan de salle) est celle
 des planches validées.
 
+Dossier complet (DA, planches, découpage, fabrication pas à pas, PDF) : [`../../dossier/`](../../dossier/README.md).
+
 Vidéo : `out/delivery/vashnik-express-master.mp4` (−16 LUFS, vérifiée par `finalize_delivery.sh`, avec sa planche
 contact et son rapport de livraison).
 
@@ -36,9 +38,12 @@ valeurs exactes du script.
 ## Voix
 
 Synthèse **Kokoro** (voix française `ff_siwis`), calculée en local : c'est une voix de travail.
-Pour la remplacer (voix enregistrée ou autre service), il suffit de fournir une phrase audio par
-ligne de `vo/script.json` : tout le reste (sous-titres, animations, bruitages) se recale sur la
-nouvelle table des temps.
+Pour la remplacer, enregistrer une phrase par ligne de `vo/script.json` et déposer les fichiers
+dans `vo/rec/` : `00.wav` pour la première ligne, `01.wav` pour la deuxième, etc. (WAV, n'importe
+quelle fréquence, mono ou stéréo, 16/24/32 bits ; le silence en tête et en queue est coupé).
+Relancer ensuite `vo/build_vo.py`, `mix.py` et `render.mjs` : les sous-titres, les animations et
+les bruitages se recalent sur la nouvelle table des temps. Une ligne sans enregistrement reste en
+Kokoro, on peut donc remplacer la voix phrase par phrase.
 
 Aides de prononciation (champ `say`) : « tanques » pour *tanks*, « exprèsse » pour *express*,
 « ouaïpe » pour *wipe*. Le texte affiché reste l'original.

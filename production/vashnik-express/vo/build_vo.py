@@ -6,6 +6,10 @@
 chaque phrase, en secondes) et vo/out/env.json (enveloppe de la voix, 30 valeurs par seconde, pour faire briller
 les yeux et les gemmes de Gideon). Les modèles (kokoro-v1.0.onnx, voices-v1.0.bin) ne sont pas
 versionnés : ils viennent de github.com/thewh1teagle/kokoro-onnx (release model-files-v1.0).
+
+Voix enregistrée : un fichier WAV par phrase dans vo/rec/, numéroté comme les lignes de
+script.json (vo/rec/00.wav, vo/rec/01.wav…). Une phrase enregistrée remplace la synthèse ; les
+autres restent en Kokoro. Si toutes les phrases sont enregistrées, les modèles ne servent plus.
 """
 import json
 import os
@@ -14,10 +18,12 @@ import wave
 
 import numpy as np
 from scipy import signal
+from scipy.io import wavfile
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 OUT = os.path.join(HERE, 'out')
 MODELS = os.environ.get('KOKORO_DIR', os.path.join(HERE, 'models'))
+REC = os.path.join(HERE, 'rec')
 SR = 48000
 FPS = 30
 LEAD = 3.0           # le carton d'intro s'installe avant la première phrase
@@ -42,17 +48,39 @@ def trim(x, sr, thr=0.012, pad=0.04):
     return x[a:b]
 
 
-from kokoro_onnx import Kokoro  # noqa: E402  (import tardif : lourd)
+def recorded(i):
+    """La phrase i enregistrée (vo/rec/NN.wav), en mono flottant, ou None."""
+    path = os.path.join(REC, f'{i:02d}.wav')
+    if not os.path.exists(path):
+        return None
+    sr, x = wavfile.read(path)
+    if x.dtype.kind in 'iu':
+        x = x.astype(np.float32) / np.iinfo(x.dtype).max
+    x = np.asarray(x, np.float32)
+    if x.ndim > 1:
+        x = x.mean(axis=1)
+    x = x / (np.abs(x).max() + 1e-9) * 0.9
+    return x, sr
 
-k = Kokoro(os.path.join(MODELS, 'kokoro-v1.0.onnx'), os.path.join(MODELS, 'voices-v1.0.bin'))
+
+k = None
 clips = []
 for i, line in enumerate(script['lines']):
-    say = line.get('say', plain(line['text']))
-    x, sr = k.create(say, voice=script['voice'], speed=script['speed'], lang='fr-fr')
+    rec = recorded(i)
+    if rec:
+        x, sr = rec
+        src = 'rec'
+    else:
+        if k is None:
+            from kokoro_onnx import Kokoro  # import tardif : lourd, inutile si tout est enregistré
+            k = Kokoro(os.path.join(MODELS, 'kokoro-v1.0.onnx'), os.path.join(MODELS, 'voices-v1.0.bin'))
+        say = line.get('say', plain(line['text']))
+        x, sr = k.create(say, voice=script['voice'], speed=script['speed'], lang='fr-fr')
+        src = 'tts'
     x = trim(np.asarray(x, np.float32), sr)
     x = signal.resample_poly(x, SR, sr).astype(np.float32)
     clips.append(x)
-    print(f'{i:02d} {len(x) / SR:5.2f}s  {plain(line["text"])[:70]}')
+    print(f'{i:02d} {src} {len(x) / SR:5.2f}s  {plain(line["text"])[:70]}')
 
 t = LEAD
 timeline = []

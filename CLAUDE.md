@@ -2,6 +2,8 @@
 
 Ce dépôt contient le script `GUIDE_VASHNIK_MYTHIQUE_SCRIPT_VIDEO.md`, les images source (racine)
 et la production de la vidéo courte dans `production/vashnik-express/` (voir son `README.md`).
+Le dossier complet (DA, planches, découpage, fabrication pas à pas) est dans `dossier/` :
+commencer par `dossier/README.md`.
 
 ## Règles de l'auteur (à respecter dans toute vidéo)
 
@@ -29,7 +31,7 @@ et la production de la vidéo courte dans `production/vashnik-express/` (voir so
 - Version longue (12 min) : pas encore produite. Sa section 3 dit « un million six cent mille »
   alors que l'annexe donne 1 666 813 : à corriger si l'auteur le confirme.
 - Voix : Kokoro `ff_siwis` est une voix de travail ; l'auteur peut enregistrer les phrases de
-  `vo/script.json` à la place.
+  `vo/script.json` à la place (`vo/rec/00.wav`, `01.wav`…, voir le README de la production).
 
 ## Refaire la vidéo dans une nouvelle session
 
