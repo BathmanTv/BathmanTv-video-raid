@@ -100,12 +100,12 @@ matérialiser le boss au-dessus d'un schéma de salle, jamais comme simple illus
 > **tenir une rotation** : bouger le boss, tuer les adds, gérer les infections — dans le bon
 > ordre, pendant huit minutes, sans jamais se tromper deux fois de suite.
 >
-> Un alone : **tous les adds doivent mourir avant d'atteindre le centre de la salle**. Il y en
+> Une seule règle : **tous les adds doivent mourir avant d'atteindre le centre de la salle**. Il y en
 > a trois types. Une fois que vous les connaissez, le boss est résolu. »
 
 **Fin de la carte : « Il y a trois fontaines. Trois venins. Une seule règle. »**
 
-**Notes** : ne pas donner de rating ni d'avis sur le boss. Méthode a noté ce combat 2/5 en
+**Notes** : ne pas donner de rating ni d'avis sur le boss. Method a noté ce combat 2/5 en
 disant qu'il « fait le travail sans enthousiasmer » — ce n'est pas notre propos ici.
 
 ---
@@ -235,7 +235,7 @@ temps qui court. Le mot « WIPE » apparaît en or, pas en rouge vif — on info
 
 **FACE CAM. Le ton se durcit légèrement — c'est la fontaine la plus dangereuse.**
 
-> « La orange, la Flamme. Et celle-là, c'est la priorité absolue des trois.
+> « L'orange, la Flamme. Et celle-là, c'est la priorité absolue des trois.
 >
 > Son venin, le **venin brûlant**, **pulse des dégâts sur tout le raid tant qu'il est en vie**
 > — **Présence brûlante** *(Burning Presence)*. Chaque seconde qu'il passe vous coûte, à vous
@@ -295,7 +295,7 @@ SANG → on se rapproche, il faut des corps dans le cercle.
 
 > « **Stygienne**, de l'Ombre. Même principe d'absorption, mais **comportement inverse** :
 > ces joueurs émettent périodiquement une **Explosion stygienne** — un éclat de venin sombre qui
-> frappe **tout le monde dans un rayon de six mètres**.
+> frappe **tout le monde dans un rayon de trois mètres cinquante**.
 >
 > Donc eux, on les **écarte**. Loin du raid, loin les uns des autres. C'est un travail de
 > placement, pas une urgence de soin : elle se soigne, mais elle ne doit pas clipper le reste
@@ -429,7 +429,7 @@ qu'on place l'image du poster « Appel de la pluie », en carton de fin sur deux
 | Temps | Contenu |
 |---|---|
 | 0:00 – 0:20 | Les 3 fontaines, le boss boit les 2 plus proches → **les tanks décident** |
-| 0:20 – 0:50 | Les venins rament vers le centre → **jamais 2 qui passent** |
+| 0:20 – 0:50 | Les venins rampent vers le centre → **jamais 2 qui passent** |
 | 0:50 – 1:30 | Sang = se diviser · Ombre = 5 + voile · Flamme = priorité, tuer en décalé |
 | 1:30 – 2:10 | Infections : **Sang on se rapproche · Ombre on s'écarte · Flamme on étale** |
 | 2:10 – 2:40 | Swap tank à chaque Crochet · Écume en croix · Soak la bile |

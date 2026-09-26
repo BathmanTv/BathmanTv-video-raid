@@ -63,15 +63,18 @@ Livraison : `finalize_delivery.sh` du skill *lanshu-create-ai-presenter-video* r
 −16 LUFS, produit une version maître et une version légère, vérifie le décodage complet et
 sort une planche contact.
 
-## Points du script à trancher
+## Corrections du script
 
-1. **Explosion stygienne** : la voix du script dit « six mètres », l'annexe et le texte à l'écran
-   disent **3,5 m** (6 m est le rayon de la bile). La vidéo dit 3,5 m.
-2. **Explosion malveillante** : la voix du script dit « un million six cent mille », l'annexe
-   donne **1 666 813** et demande de ne pas arrondir. La version express ne cite pas ce chiffre
-   à l'oral ; l'écran affiche 1 666 813.
-3. Section 1 : « Un alone : » semble une coquille (« Une seule règle : » ?).
-4. §9 : « rament » → « rampent ».
+Faites dans `GUIDE_VASHNIK_MYTHIQUE_SCRIPT_VIDEO.md` :
+
+- **Explosion stygienne** : la voix off dit maintenant « trois mètres cinquante », comme l'annexe et le
+  texte à l'écran (6 m reste le rayon de la bile).
+- Coquilles : « Un alone : » → « Une seule règle : », « Méthode » → « Method », « La orange » →
+  « L'orange », « rament » → « rampent ».
+
+Encore ouvert dans la version longue : la voix de la section 3 arrondit l'Explosion malveillante
+(« un million six cent mille ») alors que l'annexe donne 1 666 813 et demande de ne pas arrondir.
+La version express ne cite pas ce chiffre à l'oral.
 
 ## Fichiers
 
