@@ -1,0 +1,78 @@
+@font-face { font-family: "Barlow Condensed"; src: url(assets/fonts/barlow-condensed-700.woff2) format("woff2"); font-weight: 700; font-display: block; }
+@font-face { font-family: "Fira Sans"; src: url(assets/fonts/fira-sans-400.woff2) format("woff2"); font-weight: 400; font-display: block; }
+@font-face { font-family: "Fira Sans"; src: url(assets/fonts/fira-sans-500.woff2) format("woff2"); font-weight: 500; font-display: block; }
+@font-face { font-family: "JetBrains Mono"; src: url(assets/fonts/jetbrains-mono.woff2) format("woff2"); font-weight: 100 800; font-display: block; }
+
+:root {
+  /* palette du script §2.1 : cyan = technique, or = danger, une couleur par fontaine */
+  --night: #04050F; --panel: #0A0C22; --royal: #08218E; --armor: #1F3FA8; --gem: #3FB8FF;
+  --cyan: #7ADBFA; --gold: #D19A45; --marble: #EDE9E1; --muted: #A9B4C7;
+  --sang: #8E1B2E; --ombre: #6B3FA0; --flamme: #D1701F;
+  --sang-t: #E0566D; --ombre-t: #B08AE8; --flamme-t: #E8893A;   /* mêmes teintes, lisibles sur la nuit */
+  --title: "Barlow Condensed", sans-serif; --body: "Fira Sans", sans-serif; --mono: "JetBrains Mono", monospace;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { background: #000; overflow: hidden; }
+#stage { position: relative; width: 1920px; height: 1080px; overflow: hidden; background: var(--night); font-family: var(--body); color: #fff; transform-origin: 0 0; }
+.scene { position: absolute; inset: 0; overflow: hidden; }
+.abs { position: absolute; }
+.fill { position: absolute; inset: 0; }
+.t { font-family: var(--title); font-weight: 700; text-transform: uppercase; letter-spacing: .02em; line-height: .92; }
+.m { font-family: var(--mono); letter-spacing: .16em; text-transform: uppercase; }
+.s { color: var(--sang-t); } .o { color: var(--ombre-t); } .f { color: var(--flamme-t); } .c { color: var(--cyan); } .d { color: var(--gold); }
+.en { color: var(--muted); font-style: italic; font-weight: 400; }
+.rise { display: inline-block; overflow: hidden; vertical-align: top; }
+.rise > span { display: inline-block; }
+
+.studio { position: absolute; inset: 0; background:
+  radial-gradient(ellipse 55% 70% at var(--hx, 30%) 42%, rgba(31,63,168,.5), transparent 70%),
+  radial-gradient(ellipse 80% 60% at 80% 110%, rgba(8,33,142,.35), transparent 70%),
+  linear-gradient(180deg, #060A24, var(--night)); }
+.dots { position: absolute; inset: 0; background-image: radial-gradient(rgba(122,219,250,.09) 1.2px, transparent 1.4px); background-size: 32px 32px; mask-image: radial-gradient(ellipse 70% 70% at 50% 50%, #000, transparent); }
+.vign { position: absolute; inset: 0; background: radial-gradient(ellipse 90% 90% at 50% 50%, transparent 55%, rgba(0,0,0,.5)); pointer-events: none; }
+
+.presenter { position: absolute; left: 0; top: 0; width: 1672px; height: 941px; transform-origin: 0 0; }
+.presenter img { position: absolute; left: 0; top: 0; width: 1672px; filter: drop-shadow(0 0 40px rgba(63,184,255,.22)) drop-shadow(0 30px 60px rgba(0,0,0,.6)); }
+.glow { position: absolute; border-radius: 50%; mix-blend-mode: screen; background: radial-gradient(circle, rgba(170,230,255,.95) 0%, rgba(63,184,255,.55) 30%, rgba(63,184,255,0) 70%); }
+
+.chapter { position: absolute; left: 80px; top: 60px; display: flex; align-items: center; gap: 16px; }
+.chapter .dia { width: 16px; height: 16px; transform: rotate(45deg); background: var(--gem); box-shadow: 0 0 14px var(--gem); }
+.chapter .a { font: 700 30px var(--title); letter-spacing: .06em; text-transform: uppercase; white-space: nowrap; }
+.chapter .sep { width: 1px; height: 26px; background: rgba(169,180,199,.5); }
+.chapter .b { font: 500 16px var(--mono); letter-spacing: .2em; color: var(--muted); text-transform: uppercase; white-space: nowrap; }
+.prog { display: flex; gap: 5px; margin-left: 10px; } .prog i { width: 22px; height: 4px; background: rgba(169,180,199,.22); } .prog i.on { background: var(--cyan); }
+.badge { position: absolute; right: 80px; top: 56px; display: flex; gap: 10px; }
+.pill { font: 600 15px var(--mono); letter-spacing: .2em; padding: 9px 16px; border-radius: 3px; border: 1px solid rgba(169,180,199,.45); color: var(--marble); background: rgba(10,12,34,.75); white-space: nowrap; }
+.pill.myth { border-color: var(--cyan); background: linear-gradient(135deg, var(--royal), var(--armor)); box-shadow: 0 0 20px rgba(63,184,255,.35); color: #fff; }
+.chip { display: inline-flex; align-items: center; gap: 8px; padding: 9px 16px; border-radius: 999px; background: rgba(10,12,34,.85); border: 1px solid rgba(122,219,250,.45); font: 600 16px var(--mono); letter-spacing: .14em; color: var(--cyan); text-transform: uppercase; white-space: nowrap; }
+
+.lower { position: absolute; left: 80px; bottom: 150px; display: flex; background: linear-gradient(90deg, rgba(10,12,34,.94), rgba(10,12,34,.75)); border-bottom: 2px solid var(--gold); box-shadow: 0 18px 40px rgba(0,0,0,.5); }
+.lower .bar { width: 8px; background: linear-gradient(#FFE982, var(--gold)); }
+.lower .txt { padding: 14px 24px 14px 20px; }
+.lower .n { font: 700 52px var(--title); letter-spacing: .04em; line-height: 1; }
+.lower .r { font: 500 14px var(--mono); letter-spacing: .22em; color: var(--muted); margin-top: 6px; }
+.wave { display: flex; align-items: center; gap: 4px; padding: 0 22px 0 4px; }
+.wave i { width: 4px; border-radius: 2px; background: var(--gem); box-shadow: 0 0 8px rgba(63,184,255,.6); }
+
+.scrim { position: absolute; left: 0; right: 0; bottom: 0; height: 230px; background: linear-gradient(transparent, rgba(4,5,15,.82)); }
+.caption { position: absolute; left: 140px; right: 140px; bottom: 58px; text-align: center; font: 500 38px/1.3 var(--body); text-shadow: 0 2px 10px rgba(0,0,0,.9); }
+
+.tv { position: absolute; border: 2px solid var(--gold); background: var(--panel); box-shadow: 0 30px 80px rgba(0,0,0,.6); }
+.tv .head { position: absolute; left: -2px; right: -2px; top: -44px; height: 44px; display: flex; align-items: center; gap: 12px; padding: 0 16px; background: linear-gradient(90deg, var(--gold), #9C6E2B); color: var(--night); font: 700 24px var(--title); letter-spacing: .08em; text-transform: uppercase; white-space: nowrap; }
+.tv .head .live { width: 12px; height: 12px; border-radius: 50%; background: currentColor; }
+.tv .head .r { margin-left: auto; font: 600 14px var(--mono); letter-spacing: .18em; }
+.tv .body { position: absolute; inset: 0; overflow: hidden; }
+.fields { position: absolute; display: flex; gap: 12px; }
+.fields > div { flex: 1; padding: 14px 18px; background: rgba(10,12,34,.9); border-top: 2px solid var(--cyan); }
+.fields .k { font: 500 13px var(--mono); letter-spacing: .18em; color: var(--muted); text-transform: uppercase; }
+.fields .v { font: 500 24px/1.25 var(--body); margin-top: 4px; }
+
+.panel { position: absolute; background: linear-gradient(160deg, rgba(20,28,74,.92), rgba(10,12,34,.94)); border: 1px solid rgba(169,180,199,.25); border-radius: 6px; }
+.block { position: absolute; padding: 22px 28px; background: rgba(4,5,15,.86); border-left: 5px solid var(--c, var(--cyan)); font: 500 30px/1.4 var(--body); color: var(--c, var(--cyan)); }
+.block .k { font: 500 13px var(--mono); letter-spacing: .2em; color: var(--muted); margin-bottom: 8px; }
+.spell { position: absolute; padding: 18px 22px; background: rgba(10,12,34,.94); border: 1px solid var(--bc, rgba(122,219,250,.5)); border-radius: 6px; }
+.spell .n { font: 700 32px var(--title); text-transform: uppercase; letter-spacing: .03em; color: var(--nc, var(--cyan)); }
+.spell .n span { font: italic 400 20px var(--body); color: var(--muted); text-transform: none; letter-spacing: 0; margin-left: 8px; }
+.spell .v { font: 500 23px/1.4 var(--body); margin-top: 6px; color: var(--marble); }
+.spell .v b { font-weight: 500; color: var(--cyan); }
+.stamp { position: absolute; font: 700 200px var(--title); letter-spacing: .06em; color: var(--gold); text-shadow: 0 0 60px rgba(209,154,69,.6), 0 8px 30px rgba(0,0,0,.8); }

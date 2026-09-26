@@ -1,0 +1,114 @@
+{
+  "_doc": "Voix off de la version « strat express » (§9 du script). Chaque phrase vient du script GUIDE_VASHNIK_MYTHIQUE_SCRIPT_VIDEO.md, raccourcie sans ajouter de fait ni de chiffre. {c:…} cyan = technique, {d:…} or = danger, {s:…}/{o:…}/{f:…} = couleur de la fontaine. « say » = texte envoyé à la synthèse vocale quand la prononciation doit être aidée.",
+  "voice": "ff_siwis",
+  "speed": 0.85,
+  "lines": [
+    {
+      "scene": "intro",
+      "text": "Vashnik le Malveillant, en {c:Mythique}. La strat express, en trois minutes.",
+      "say": "Vashnik le Malveillant, en Mythique. La strat exprèsse, en trois minutes."
+    },
+    {
+      "scene": "hook",
+      "text": "Le combat a une seule phase. Il ne demande pas de faire de gros dégâts : il demande de {c:tenir une rotation}."
+    },
+    {
+      "scene": "room",
+      "text": "La salle est découpée en trois tiers, et chaque tiers a sa fontaine : le {s:Sang}, l’{o:Ombre} et la {f:Flamme}."
+    },
+    {
+      "scene": "room",
+      "text": "Au centre, la {d:Cavité malveillante}. C’est le point de défaite du combat."
+    },
+    {
+      "scene": "imbibe",
+      "text": "Quand sa barre d’énergie est pleine, Vashnik lance {c:Absorption}, et il boit aux {c:deux fontaines les plus proches} de sa position."
+    },
+    {
+      "scene": "rotation",
+      "text": "Donc ce sont {c:les tanks qui décident}. On tourne : une seule nouvelle fontaine par cycle.",
+      "say": "Donc ce sont les tanques qui décident. On tourne : une seule nouvelle fontaine par cycle.",
+      "hold": 2.2
+    },
+    {
+      "scene": "venoms",
+      "text": "Chaque fontaine bue éjecte un venin vivant, qui rampe vers la Cavité."
+    },
+    {
+      "scene": "venoms",
+      "text": "Un venin qui atteint le centre, c’est survivable. {d:Deux, c’est un wipe.}",
+      "say": "Un venin qui atteint le centre, c’est survivable. Deux, c’est un ouaïpe.",
+      "hold": 1.2
+    },
+    {
+      "scene": "venoms",
+      "text": "Après {c:soixante secondes}, un venin encore en vie devient insensible aux contrôles, et plus rapide. {d:Il n’y a pas de plus tard.}",
+      "hold": 1.0
+    },
+    {
+      "scene": "blood",
+      "text": "Le {s:Sang} est insensible aux contrôles, et quand il meurt, {s:il se divise en caillots}. Tuez aussi les petits."
+    },
+    {
+      "scene": "shadow",
+      "text": "L’{o:Ombre} arrive par paquets de cinq, sous un voile qui vaut toute sa vie : {o:on le tue deux fois}, là où l’on veut que les flaques tombent."
+    },
+    {
+      "scene": "flame",
+      "text": "La {f:Flamme}, c’est la {d:priorité absolue}. Tant qu’il vit, il fait mal à tout le raid, et quand il meurt, il explose."
+    },
+    {
+      "scene": "flame",
+      "text": "Il en arrive deux : on contrôle le premier, on tue le second. {d:Jamais les deux ensemble.}",
+      "hold": 1.2
+    },
+    {
+      "scene": "infect",
+      "text": "Vashnik infecte les joueurs avec le venin des fontaines qu’il vient de boire. Trois infections, {c:trois réflexes opposés}.",
+      "hold": 0.6
+    },
+    {
+      "scene": "infect",
+      "text": "{s:Sang} : on se rapproche. Il faut des corps dans le cercle."
+    },
+    {
+      "scene": "infect",
+      "text": "{o:Ombre} : on s’écarte. Personne dans le cercle de {c:trois mètres cinquante}."
+    },
+    {
+      "scene": "infect",
+      "text": "{f:Flamme} : on étale les dissipations, et {d:jamais sur un raid bas}.",
+      "hold": 1.4
+    },
+    {
+      "scene": "fangs",
+      "text": "Trois réflexes de fond, quelles que soient les fontaines. Les tanks : {c:swap à chaque Crochet dégoulinant}.",
+      "say": "Trois réflexes de fond, quelles que soient les fontaines. Les tanques : swap à chaque Crochet dégoulinant."
+    },
+    {
+      "scene": "froth",
+      "text": "{c:Écume pestilentielle} : les marqués s’écartent, et tout le monde se place {c:entre les axes} des vagues."
+    },
+    {
+      "scene": "bile",
+      "text": "{c:Catalyseur malveillant} : chaque impact de bile doit être encaissé par au moins un joueur. On s’étale pour tout couvrir.",
+      "hold": 0.8
+    },
+    {
+      "scene": "tumors",
+      "text": "En {c:Mythique}, des tumeurs apparaissent aussi. Si elles ne sont pas détruites, c’est {d:Malveillance, cumulable : un wipe à retardement}.",
+      "say": "En Mythique, des tumeurs apparaissent aussi. Si elles ne sont pas détruites, c’est Malveillance, cumulable : un ouaïpe à retardement.",
+      "hold": 1.0
+    },
+    {
+      "scene": "tumors",
+      "text": "Et ce sont {c:les vagues d’Écume qui les détruisent} : les marqués orientent leurs vagues vers les tumeurs.",
+      "hold": 1.6
+    },
+    {
+      "scene": "outro",
+      "text": "Tuez les adds, tournez les fontaines, lisez les infections. {c:Et Vashnik tombe.}",
+      "say": "Tuez les adds, tournez les fontaines, lisez les infections. Et Vashnik tombe."
+    }
+  ]
+}

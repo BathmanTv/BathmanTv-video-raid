@@ -1,0 +1,336 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Dossier de créa — Vashnik strat express</title>
+<!-- Source de ../dossier-crea.pdf : node pdf.mjs -->
+<style>
+@font-face { font-family: "Barlow Condensed"; src: url(../../production/vashnik-express/assets/fonts/barlow-condensed-700.woff2) format("woff2"); font-weight: 700; }
+@font-face { font-family: "Fira Sans"; src: url(../../production/vashnik-express/assets/fonts/fira-sans-400.woff2) format("woff2"); font-weight: 400; }
+@font-face { font-family: "Fira Sans"; src: url(../../production/vashnik-express/assets/fonts/fira-sans-500.woff2) format("woff2"); font-weight: 500; }
+@font-face { font-family: "JetBrains Mono"; src: url(../../production/vashnik-express/assets/fonts/jetbrains-mono.woff2) format("woff2"); font-weight: 100 800; }
+@page { size: 1920px 1080px; margin: 0; }
+:root {
+  --night: #04050F; --panel: #0A0C22; --royal: #08218E; --armor: #1F3FA8; --gem: #3FB8FF;
+  --cyan: #7ADBFA; --gold: #D19A45; --gold-hi: #FFE982; --marble: #EDE9E1; --muted: #A9B4C7;
+  --sang: #8E1B2E; --ombre: #6B3FA0; --flamme: #D1701F; --sang-t: #E0566D; --ombre-t: #B08AE8; --flamme-t: #E8893A;
+  --title: "Barlow Condensed", sans-serif; --body: "Fira Sans", sans-serif; --mono: "JetBrains Mono", monospace;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { background: var(--night); }
+body { font-family: var(--body); color: #fff; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+.page { position: relative; width: 1920px; height: 1080px; overflow: hidden; page-break-after: always; break-after: page;
+  background: radial-gradient(ellipse 60% 70% at 18% 20%, rgba(31,63,168,.28), transparent 70%), linear-gradient(180deg, #060A24, var(--night)); }
+.page:last-child { page-break-after: auto; break-after: auto; }
+.dots { position: absolute; inset: 0; background-image: radial-gradient(rgba(122,219,250,.07) 1.2px, transparent 1.4px); background-size: 32px 32px; }
+.top { position: absolute; left: 96px; right: 96px; top: 56px; display: flex; justify-content: space-between; font: 500 15px var(--mono); letter-spacing: .2em; color: var(--muted); text-transform: uppercase; }
+.top b { color: var(--gold); font-weight: 500; }
+.h { position: absolute; left: 96px; top: 104px; display: flex; align-items: center; gap: 22px; }
+.h .dia { width: 18px; height: 18px; transform: rotate(45deg); background: var(--gem); box-shadow: 0 0 14px var(--gem); }
+.h h2 { font: 700 76px/1 var(--title); text-transform: uppercase; letter-spacing: .02em; }
+.lede { position: absolute; left: 96px; top: 206px; width: 1300px; font: 400 26px/1.45 var(--body); color: var(--muted); }
+.lede b, p b { color: #fff; font-weight: 500; }
+.k { font: 500 14px var(--mono); letter-spacing: .2em; color: var(--muted); text-transform: uppercase; }
+.c { color: var(--cyan); } .d { color: var(--gold); } .s { color: var(--sang-t); } .o { color: var(--ombre-t); } .f { color: var(--flamme-t); }
+.abs { position: absolute; }
+.card { position: absolute; background: rgba(10,12,34,.88); border: 1px solid rgba(169,180,199,.22); border-radius: 8px; padding: 26px 30px; }
+.card h3 { font: 700 34px/1.05 var(--title); text-transform: uppercase; letter-spacing: .02em; margin: 10px 0 12px; }
+.card p, .card li { font: 400 21px/1.5 var(--body); color: #D6DCE8; }
+.card ul { list-style: none; } .card li { padding-left: 22px; position: relative; margin: 6px 0; }
+.card li::before { content: ""; position: absolute; left: 2px; top: 11px; width: 8px; height: 8px; transform: rotate(45deg); background: var(--gold); }
+.shot { position: absolute; border: 1px solid rgba(209,154,69,.55); box-shadow: 0 24px 60px rgba(0,0,0,.55); background: #000 center/cover no-repeat; }
+.cap { position: absolute; font: 500 14px var(--mono); letter-spacing: .16em; color: var(--muted); text-transform: uppercase; }
+.crop { position: absolute; border: 1px solid rgba(209,154,69,.4); background-repeat: no-repeat; box-shadow: 0 18px 40px rgba(0,0,0,.5); }
+table { border-collapse: collapse; width: 100%; }
+td, th { text-align: left; padding: 10px 14px; border-bottom: 1px solid rgba(169,180,199,.16); font: 400 20px/1.35 var(--body); color: #D6DCE8; vertical-align: top; }
+th { font: 500 13px var(--mono); letter-spacing: .18em; color: var(--muted); text-transform: uppercase; }
+.sw { display: inline-block; width: 30px; height: 30px; border-radius: 4px; vertical-align: middle; margin-right: 12px; border: 1px solid rgba(255,255,255,.15); }
+.hex { font: 500 17px var(--mono); color: var(--muted); }
+</style>
+</head>
+<body>
+
+<!-- 01 · couverture -->
+<section class="page" id="p1" style="background:radial-gradient(ellipse 55% 75% at 72% 45%, rgba(31,63,168,.55), transparent 70%), linear-gradient(180deg,#060A24,var(--night))">
+  <div class="dots"></div>
+  <img class="abs" src="../../production/vashnik-express/assets/img/gideon.png" style="left:560px;top:120px;width:1672px;filter:drop-shadow(0 0 40px rgba(63,184,255,.25))">
+  <div class="abs" style="left:96px;top:96px;font:500 17px var(--mono);letter-spacing:.24em;color:var(--gold)">GUIDE DE BOSS · DOSSIER DE CRÉATION</div>
+  <div class="abs" style="left:90px;top:300px;font:700 220px/0.86 var(--title);color:var(--gold);text-shadow:0 0 60px rgba(209,154,69,.35)">VASHNIK</div>
+  <div class="abs" style="left:96px;top:500px;font:700 64px/1 var(--title);text-transform:uppercase">Le Malveillant</div>
+  <div class="abs" style="left:96px;top:590px;display:flex;gap:12px">
+    <span style="font:600 16px var(--mono);letter-spacing:.2em;padding:9px 16px;border-radius:3px;border:1px solid var(--cyan);background:linear-gradient(135deg,var(--royal),var(--armor))">MYTHIQUE</span>
+    <span style="font:600 16px var(--mono);letter-spacing:.2em;padding:9px 16px;border-radius:3px;border:1px solid rgba(169,180,199,.45);background:rgba(10,12,34,.75)">STRAT EXPRESS</span>
+  </div>
+  <div class="abs" style="left:96px;top:700px;width:720px;font:400 28px/1.45 var(--body);color:#D6DCE8">Direction artistique de la vidéo guide présentée par <b style="color:#fff;font-weight:500">Gideon</b> : charte, personnages, composants, plan de salle, mouvement, son, planches et découpage.</div>
+  <div class="abs k" style="left:96px;bottom:70px">2 min 55 · 1920 × 1080 · 30 i/s · −16 LUFS · septembre 2026</div>
+</section>
+
+<!-- 02 · l'intention -->
+<section class="page">
+  <div class="dots"></div>
+  <div class="top"><span>Dossier de créa · <b>Vashnik strat express</b></span><span>02 · L'intention</span></div>
+  <div class="h"><i class="dia"></i><h2>Une émission, trois plans</h2></div>
+  <div class="lede">Un présentateur face caméra parle du sujet, <b>un encart télé</b> montre la mécanique pendant qu'il parle, puis <b>le plan de salle vu de dessus</b> la montre en mouvement. Le spectateur doit pouvoir suivre une fontaine <b>sans lire</b>, juste à la couleur.</div>
+  <div class="shot" style="left:96px;top:370px;width:560px;height:315px;background-image:url(../images-cles/0-12_0.jpg)"></div>
+  <div class="shot" style="left:680px;top:370px;width:560px;height:315px;background-image:url(../images-cles/1-20_0.jpg)"></div>
+  <div class="shot" style="left:1264px;top:370px;width:560px;height:315px;background-image:url(../images-cles/0-43_0.jpg)"></div>
+  <div class="cap" style="left:96px;top:700px">1 · Face caméra + encart télé</div>
+  <div class="cap" style="left:680px;top:700px">2 · Vignette de mécanique dans l'encart</div>
+  <div class="cap" style="left:1264px;top:700px">3 · Plan de salle schématique</div>
+  <div class="card" style="left:96px;top:780px;width:1728px;padding:22px 30px">
+    <table>
+      <tr><th>Format</th><th>Durée</th><th>Ton</th><th>Source du texte</th><th>Chiffres</th></tr>
+      <tr><td>16:9 · 1920 × 1080 · 30 i/s</td><td>2 min 55 (§9 du script)</td><td>Direct, technique, sans condescendance</td><td>Chaque phrase vient du script</td><td>Ceux de l'annexe §10, jamais arrondis</td></tr>
+    </table>
+  </div>
+</section>
+
+<!-- 03 · personnages -->
+<section class="page">
+  <div class="dots"></div>
+  <div class="top"><span>Dossier de créa · <b>Vashnik strat express</b></span><span>03 · Les personnages</span></div>
+  <div class="h"><i class="dia"></i><h2>Les personnages</h2></div>
+  <div class="abs" style="left:96px;top:230px;width:760px;height:430px;overflow:hidden;border:1px solid rgba(209,154,69,.55);background:radial-gradient(ellipse 60% 80% at 50% 45%,rgba(31,63,168,.55),transparent 70%),#060A24">
+    <img src="../../production/vashnik-express/assets/img/gideon.png" style="position:absolute;left:-470px;top:-60px;width:1672px">
+  </div>
+  <div class="card" style="left:96px;top:684px;width:760px;height:330px">
+    <div class="k">Le présentateur</div><h3>Gideon <span style="font:400 22px var(--body);color:var(--muted);text-transform:none">coach de raid</span></h3>
+    <ul>
+      <li>Armure bleu roi et or, gemmes cyan, cape violette, <b style="color:#fff;font-weight:500">casque sans bouche</b>.</li>
+      <li>Pas de synchro labiale : <span class="c">les yeux et les gemmes s'allument au rythme de la voix</span>.</li>
+      <li>Respiration lente (4,4 s). Il ne « joue » pas.</li>
+    </ul>
+  </div>
+  <div class="abs" style="left:900px;top:230px;width:440px;height:430px;border:1px solid rgba(209,154,69,.55);background:#060A24 url(../../production/vashnik-express/assets/img/vashnik.png) center/contain no-repeat"></div>
+  <div class="card" style="left:900px;top:684px;width:440px;height:330px">
+    <div class="k">Le boss</div><h3>Vashnik <span style="font:400 22px var(--body);color:var(--muted);text-transform:none">le Malveillant</span></h3>
+    <div style="display:flex;gap:20px;align-items:center">
+      <div style="width:96px;height:96px;flex:none;border-radius:50%;border:3px solid var(--gold);box-shadow:0 0 0 10px rgba(209,154,69,.22);background:url(../../production/vashnik-express/assets/img/vashnik-token.png) center/cover"></div>
+      <p>Sur le plan : <b>médaillon cerclé d'or</b> (la couleur du danger). Pendant l'Absorption : carte du boss.</p>
+    </div>
+  </div>
+  <div class="abs" style="left:1384px;top:230px;width:440px;height:430px;border:1px solid rgba(209,154,69,.55);background:#060A24 url(../../production/vashnik-express/assets/img/ingenieur.png) center/contain no-repeat"></div>
+  <div class="card" style="left:1384px;top:684px;width:440px;height:330px">
+    <div class="k">Côté tanks</div><h3>L'ingénieur</h3>
+    <p>L'orc fourni sur fond vert, détouré. Il illustre <span class="c">Crochets dégoulinants</span> : les tanks swap à chaque cast.</p>
+  </div>
+</section>
+
+<!-- 04 · couleurs -->
+<section class="page">
+  <div class="dots"></div>
+  <div class="top"><span>Dossier de créa · <b>Vashnik strat express</b></span><span>04 · Les couleurs</span></div>
+  <div class="h"><i class="dia"></i><h2>Les couleurs</h2></div>
+  <div class="lede">La base vient du personnage. Les couleurs des mécaniques viennent du script (§2.1), <b>identiques à l'overlay de la guilde</b>.</div>
+  <div class="card" style="left:96px;top:300px;width:900px;height:700px">
+    <div class="k" style="margin-bottom:10px">Base · personnage et habillage</div>
+    <table id="base"></table>
+  </div>
+  <div class="card" style="left:1030px;top:300px;width:794px;height:330px">
+    <div class="k" style="margin-bottom:10px">Les trois fontaines</div>
+    <table>
+      <tr><th>Fontaine</th><th>Zone (script)</th><th>Texte sur la nuit</th></tr>
+      <tr><td class="s" style="font:700 28px var(--title)">SANG</td><td><i class="sw" style="background:var(--sang)"></i><span class="hex">#8E1B2E</span></td><td><i class="sw" style="background:var(--sang-t)"></i><span class="hex">#E0566D</span></td></tr>
+      <tr><td class="o" style="font:700 28px var(--title)">OMBRE</td><td><i class="sw" style="background:var(--ombre)"></i><span class="hex">#6B3FA0</span></td><td><i class="sw" style="background:var(--ombre-t)"></i><span class="hex">#B08AE8</span></td></tr>
+      <tr><td class="f" style="font:700 28px var(--title)">FLAMME</td><td><i class="sw" style="background:var(--flamme)"></i><span class="hex">#D1701F</span></td><td><i class="sw" style="background:var(--flamme-t)"></i><span class="hex">#E8893A</span></td></tr>
+    </table>
+  </div>
+  <div class="card" style="left:1030px;top:660px;width:794px;height:340px">
+    <div class="k">Les règles</div>
+    <ul style="margin-top:10px">
+      <li><span class="c">Cyan = technique</span>, <span class="d">or = danger</span> (WIPE compris), une couleur par fontaine.</li>
+      <li>Quand une fontaine est nommée, son mot prend sa couleur, sous-titres compris.</li>
+      <li>Badge Mythique <b style="color:#fff;font-weight:500">bleu</b> : le violet appartient à l'Ombre.</li>
+      <li>Le rouge « danger » et le vert « zone sûre » des planches sont retirés de la vidéo.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- 05 · typographie -->
+<section class="page">
+  <div class="dots"></div>
+  <div class="top"><span>Dossier de créa · <b>Vashnik strat express</b></span><span>05 · La typographie</span></div>
+  <div class="h"><i class="dia"></i><h2>La typographie</h2></div>
+  <div class="card" style="left:96px;top:240px;width:1728px;height:230px">
+    <div class="k">Barlow Condensed 700 · titres, sorts, chapitres · capitales</div>
+    <div style="font:700 120px/1.1 var(--title);text-transform:uppercase;margin-top:6px">Explosion <span class="d">malveillante</span></div>
+  </div>
+  <div class="card" style="left:96px;top:500px;width:1728px;height:230px">
+    <div class="k">Fira Sans 400 / 500 · texte courant, sous-titres (38 px), valeurs</div>
+    <div style="font:500 44px/1.45 var(--body);margin-top:14px">Le <span class="s">Sang</span> est insensible aux contrôles, et quand il meurt, <span class="s">il se divise</span>.</div>
+    <div style="font:400 26px/1.4 var(--body);margin-top:6px;color:var(--muted)"><i>(Malignant Burst)</i> — le nom anglais, en italique gris, après le nom français</div>
+  </div>
+  <div class="card" style="left:96px;top:760px;width:1728px;height:230px">
+    <div class="k">JetBrains Mono · étiquettes, badges, chronos · capitales espacées</div>
+    <div style="display:flex;gap:26px;align-items:center;margin-top:30px;font:500 26px var(--mono);letter-spacing:.2em;text-transform:uppercase">
+      <span style="color:var(--muted)">Face cam</span><span style="color:var(--muted)">·</span><span>Vers le centre</span><span style="color:var(--muted)">·</span><span class="c">1 666 813</span><span style="color:var(--muted)">·</span><span style="padding:8px 16px;border:1px solid var(--cyan);border-radius:3px;background:linear-gradient(135deg,var(--royal),var(--armor));font-size:20px">Mythique</span>
+    </div>
+  </div>
+</section>
+
+<!-- 06 · composants -->
+<section class="page">
+  <div class="dots"></div>
+  <div class="top"><span>Dossier de créa · <b>Vashnik strat express</b></span><span>06 · Les composants</span></div>
+  <div class="h"><i class="dia"></i><h2>Les composants</h2></div>
+  <div id="crops"></div>
+  <div class="card" style="left:1250px;top:800px;width:574px;height:230px">
+    <div class="k">Où les trouver</div>
+    <p style="margin-top:12px">Tous les composants sont définis dans <span class="c">production/vashnik-express/style.css</span> ; leur construction et leurs animations dans <span class="c">video.js</span>.</p>
+  </div>
+</section>
+
+<!-- 07 · plan de salle -->
+<section class="page">
+  <div class="dots"></div>
+  <div class="top"><span>Dossier de créa · <b>Vashnik strat express</b></span><span>07 · Le plan de salle</span></div>
+  <div class="h"><i class="dia"></i><h2>Le plan de salle</h2></div>
+  <div class="shot" style="left:96px;top:230px;width:1060px;height:596px;background-image:url(../images-cles/0-43_0.jpg)"></div>
+  <div class="shot" style="left:96px;top:846px;width:340px;height:191px;background-image:url(../images-cles/0-26_5.jpg)"></div>
+  <div class="shot" style="left:456px;top:846px;width:340px;height:191px;background-image:url(../images-cles/0-56_2.jpg)"></div>
+  <div class="shot" style="left:816px;top:846px;width:340px;height:191px;background-image:url(../images-cles/2-40_0.jpg)"></div>
+  <div class="card" style="left:1196px;top:230px;width:628px;height:807px">
+    <div class="k">Un seul dessin qui vit de 0:16 à 1:07</div>
+    <ul style="margin-top:14px">
+      <li>Trois tiers : <span class="s">Sang</span> en haut à gauche, <span class="o">Ombre</span> en haut à droite, <span class="f">Flamme</span> en bas, chacun avec sa fontaine.</li>
+      <li>Au centre, la <span class="d">Cavité malveillante</span> : cercle pointillé or, le point de défaite.</li>
+      <li>Les fontaines s'allument quand elles sont nommées.</li>
+      <li>Le médaillon de Vashnik entre, boit aux deux fontaines les plus proches, puis tourne : Sang+Ombre → Ombre+Flamme → Flamme+Sang.</li>
+      <li>Les venins rampent vers la Cavité : un venin = survivable, deux = tampon <span class="d">WIPE</span>.</li>
+      <li>En Mythique : les tumeurs, puis les vagues d'Écume en croix qui les détruisent.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- 08 · mouvement et son -->
+<section class="page">
+  <div class="dots"></div>
+  <div class="top"><span>Dossier de créa · <b>Vashnik strat express</b></span><span>08 · Mouvement et son</span></div>
+  <div class="h"><i class="dia"></i><h2>Tout est calé sur la voix</h2></div>
+  <div class="lede">Les plans commencent et finissent sur les phrases de la voix off ; chaque apparition tombe sur le mot qui la déclenche.</div>
+  <div class="abs" style="left:96px;top:320px;width:1728px">
+    <div class="k" style="margin-bottom:12px">Les plans · 0 → <span id="dur"></span> s</div>
+    <div id="tl" style="position:relative;height:96px"></div>
+    <div class="k" style="margin:26px 0 12px">Les 23 phrases de la voix off</div>
+    <div id="vo" style="position:relative;height:28px"></div>
+  </div>
+  <div class="card" style="left:96px;top:600px;width:840px;height:300px">
+    <div class="k">Le mouvement</div>
+    <ul style="margin-top:12px">
+      <li>Fondu enchaîné de <b style="color:#fff;font-weight:500">0,35 s</b> entre les plans.</li>
+      <li>Sortie cubique pour les entrées, entrée cubique pour les sorties, léger rebond pour ce qui se pose.</li>
+      <li>Sous-titres : une ligne à la fois, coupée à la ponctuation, jamais de « : » en début de ligne.</li>
+      <li>Fin : lent zoom de 5 % sur le diner, fondu au noir de 1,2 s.</li>
+    </ul>
+  </div>
+  <div class="card" style="left:984px;top:600px;width:840px;height:300px">
+    <div class="k">Le son</div>
+    <ul style="margin-top:12px">
+      <li>Voix : 0,5 s entre deux phrases, 1,4 s entre deux scènes.</li>
+      <li>Fond en <b style="color:#fff;font-weight:500">fa mineur, 72 BPM</b> (Fm – D♭ – A♭ – E♭), qui s'efface sous la voix (≈ −9 dB).</li>
+      <li>Bruitages calés sur les animations : souffles, clochettes des fontaines, impacts des venins et du WIPE, « chut » de Gideon.</li>
+      <li>Master : <span class="c">−16,0 LUFS</span> intégrés, crête −2,1 dBFS.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- 09 · planches -->
+<section class="page">
+  <div class="top"><span>Dossier de créa · <b>Vashnik strat express</b></span><span>09 · Les planches validées</span></div>
+  <div class="abs" style="left:96px;top:104px;font:700 60px/1 var(--title);text-transform:uppercase">Les 7 planches validées</div>
+  <div class="abs k" style="left:96px;top:176px">Charte · ouverture · caméra + encart · in-game · schéma · chapitre · à retenir — textes provisoires</div>
+  <img class="abs" src="../planches/vue-ensemble.png" style="left:584px;top:216px;height:846px;border:1px solid rgba(209,154,69,.45)">
+</section>
+
+<!-- 10 · découpage 12 min -->
+<section class="page">
+  <div class="top"><span>Dossier de créa · <b>Vashnik strat express</b></span><span>10 · Le découpage 12 min</span></div>
+  <div class="abs" style="left:96px;top:104px;font:700 60px/1 var(--title);text-transform:uppercase">Le découpage de la version 12 minutes</div>
+  <div class="abs k" style="left:96px;top:176px">16 images clés d'après le script · le boss y est encore provisoire · version longue pas encore produite</div>
+  <img class="abs" src="../decoupage-12min/vue-ensemble.jpg" style="left:220px;top:216px;width:1480px;border:1px solid rgba(209,154,69,.45)">
+</section>
+
+<!-- 11 · déroulé final -->
+<section class="page">
+  <div class="top"><span>Dossier de créa · <b>Vashnik strat express</b></span><span>11 · La vidéo finale</span></div>
+  <div class="abs" style="left:96px;top:104px;font:700 60px/1 var(--title);text-transform:uppercase">La vidéo finale, image par image</div>
+  <div id="grid" class="abs" style="left:96px;top:190px;width:1728px"></div>
+</section>
+
+<!-- 12 · règles -->
+<section class="page">
+  <div class="dots"></div>
+  <div class="top"><span>Dossier de créa · <b>Vashnik strat express</b></span><span>12 · Les règles</span></div>
+  <div class="h"><i class="dia"></i><h2>Les règles de contenu</h2></div>
+  <div class="card" style="left:96px;top:240px;width:1060px;height:400px">
+    <div class="k">À respecter dans toute vidéo</div>
+    <ul style="margin-top:14px">
+      <li>Ne jamais montrer de données personnelles : pseudos réels, messages privés, identifiants de compte, de guilde ou de serveur, clés d'API.</li>
+      <li>Éviter les phrases que liste l'auteur (voir <span class="c">CLAUDE.md</span>).</li>
+      <li>Ne rien inventer : aucun chiffre, aucune fonctionnalité, aucun témoignage qui ne soit pas dans le script.</li>
+      <li>Ne pas arrondir, ne pas reformuler en « environ » si le chiffre est exact.</li>
+      <li>Noms de sorts en français, tels qu'ils s'affichent en jeu, nom anglais entre parenthèses.</li>
+    </ul>
+  </div>
+  <div class="card" style="left:1196px;top:240px;width:628px;height:400px;border-color:rgba(209,154,69,.55)">
+    <div class="k" style="color:var(--gold)">Encore ouvert</div>
+    <ul style="margin-top:14px">
+      <li>Orthographe du boss : « Vashnik » (script, vidéo) ou « Vashniek » ?</li>
+      <li>Version 12 min : chiffre arrondi de la section 3 (1 666 813 dans l'annexe).</li>
+      <li>Voix de travail (Kokoro) ou voix enregistrée (<span class="c">vo/rec/</span>) ?</li>
+    </ul>
+  </div>
+  <div class="abs k" style="left:96px;bottom:70px">Détails : DOSSIER_CREA.md · Fabrication : ANNEXE_CREATION_VIDEO.md</div>
+</section>
+
+<script src="../../production/vashnik-express/vo/out/data.js"></script>
+<script>
+const L = window.TL.lines, DUR = window.TL.duration, st = i => L[i].start
+// les mêmes bornes que video.js
+const B = { hook: st(1) - 0.6, map: st(2) - 0.4, det: st(9) - 0.6, inf: st(13) - 0.6, fang: st(17) - 0.8, froth: st(18) - 0.6, bile: st(19) - 0.6, tum: st(20) - 0.7, out: st(22) - 0.9 }
+const SC = [[0, 'Intro', '#1F3FA8'], [B.hook, 'Accroche', '#08218E'], [B.map, 'Salle · Absorption · rotation · venins', '#D19A45'], [B.det, 'Les trois venins', '#8E1B2E'], [B.inf, 'Infections', '#6B3FA0'], [B.fang, 'Crochets', '#1F3FA8'], [B.froth, 'Écume', '#08218E'], [B.bile, 'Bile', '#1F3FA8'], [B.tum, 'Mythique', '#D1701F'], [B.out, 'Fin', '#08218E']]
+const mmss = t => `${Math.floor(t / 60)}:${String(Math.floor(t % 60)).padStart(2, '0')}`
+document.getElementById('dur').textContent = DUR.toFixed(1).replace('.', ',')
+const W = 1728, tl = document.getElementById('tl')
+SC.forEach(([t0, name, col], i) => {
+  const t1 = i + 1 < SC.length ? SC[i + 1][0] : DUR
+  const x = t0 / DUR * W, w = (t1 - t0) / DUR * W
+  tl.insertAdjacentHTML('beforeend', `<div style="position:absolute;left:${x}px;width:${w - 3}px;top:0;height:56px;background:${col};border-radius:3px;overflow:hidden;padding:8px 10px;font:600 15px var(--title);letter-spacing:.04em;text-transform:uppercase;white-space:nowrap">${w > 70 ? name : ''}</div>
+    <div style="position:absolute;left:${x}px;top:64px;font:500 13px var(--mono);color:var(--muted)">${mmss(t0)}</div>`)
+})
+const vo = document.getElementById('vo')
+L.forEach(l => vo.insertAdjacentHTML('beforeend', `<div style="position:absolute;left:${l.start / DUR * W}px;width:${(l.end - l.start) / DUR * W}px;top:0;height:22px;background:rgba(122,219,250,.55);border-radius:2px"></div>`))
+
+// base palette
+const BASE = [['Nuit', '#04050F', 'fond de tous les plans'], ['Panneau', '#0A0C22', 'encarts, cartes, tableaux'], ['Bleu roi', '#08218E', 'studio, badge Mythique'], ['Armure', '#1F3FA8', 'studio, dégradés'], ['Gemme', '#3FB8FF', 'chapitre, onde de voix, lueurs'], ['Cyan', '#7ADBFA', 'technique : sorts, chiffres'], ['Or', '#D19A45', 'danger, cadre de l’encart télé'], ['Or clair', '#FFE982', 'barre du bandeau nom'], ['Marbre', '#EDE9E1', 'texte clair secondaire'], ['Gris', '#A9B4C7', 'étiquettes, noms anglais']]
+document.getElementById('base').innerHTML = '<tr><th>Nom</th><th>Hex</th><th>Usage</th></tr>' + BASE.map(([n, x, u]) => `<tr><td><i class="sw" style="background:${x}"></i>${n}</td><td class="hex">${x}</td><td>${u}</td></tr>`).join('')
+
+// composants : découpés dans les images de la vidéo finale (1920 × 1080)
+const CROPS = [
+  ['0-12_0.jpg', 40, 30, 720, 80, 96, 240, 1, 'Chapitre · haut gauche'],
+  ['0-12_0.jpg', 1560, 30, 320, 80, 860, 240, 1, 'Badges · haut droite'],
+  ['0-12_0.jpg', 50, 800, 620, 160, 96, 380, 1, 'Bandeau nom + onde de voix'],
+  ['0-12_0.jpg', 300, 960, 1320, 100, 96, 600, 0.8, 'Sous-titres'],
+  ['0-54_0.jpg', 1200, 90, 660, 500, 96, 740, 0.45, 'Blocs et carte de sort'],
+  ['0-56_2.jpg', 180, 330, 700, 560, 430, 740, 0.45, 'Tampon WIPE'],
+  ['0-12_0.jpg', 980, 120, 880, 600, 1250, 240, 0.65, 'Encart télé'],
+  ['1-20_0.jpg', 960, 620, 900, 100, 1250, 680, 0.64, 'Cases sous l’encart'],
+]
+const cr = document.getElementById('crops')
+CROPS.forEach(([f, x, y, w, h, px, py, s, label]) => {
+  cr.insertAdjacentHTML('beforeend', `<div class="crop" style="left:${px}px;top:${py}px;width:${w * s}px;height:${h * s}px;background-image:url(../images-cles/${f});background-size:${1920 * s}px ${1080 * s}px;background-position:${-x * s}px ${-y * s}px"></div>
+    <div class="cap" style="left:${px}px;top:${py + h * s + 10}px">${label}</div>`)
+})
+
+// grille de la vidéo finale
+const G = [['0-01_5', 'Carton d’intro'], ['0-12_0', 'Accroche'], ['0-21_0', 'La salle'], ['0-26_5', 'La Cavité'], ['0-34_0', 'Absorption'], ['0-43_0', 'Rotation'], ['0-54_0', 'Les venins'], ['0-56_2', 'WIPE'], ['1-02_0', 'Venin durci'], ['1-11_0', 'Sang'], ['1-20_0', 'Ombre'], ['1-28_0', 'Flamme'], ['1-36_5', 'Jamais les deux'], ['1-44_0', 'Infections'], ['1-54_0', 'Stygienne'], ['2-07_0', 'Crochets'], ['2-14_0', 'Écume'], ['2-22_0', 'Catalyseur'], ['2-32_0', 'Tumeurs'], ['2-40_0', 'Vagues d’Écume'], ['2-50_0', 'Carton de fin']]
+const grid = document.getElementById('grid'), cw = (1728 - 5 * 16) / 6, ch = cw * 9 / 16
+G.forEach(([f, n], i) => {
+  const x = (i % 6) * (cw + 16), y = Math.floor(i / 6) * (ch + 40)
+  grid.insertAdjacentHTML('beforeend', `<div class="shot" style="left:${x}px;top:${y}px;width:${cw}px;height:${ch}px;background-image:url(../images-cles/${f}.jpg);border-color:rgba(169,180,199,.3)"></div>
+    <div class="cap" style="left:${x}px;top:${y + ch + 6}px;letter-spacing:.1em"><span style="color:var(--gold)">${f.replace('-', ':').replace('_', ',')}</span> · ${n}</div>`)
+})
+window.__ready = Promise.all([document.fonts.ready, ...[...document.images].map(i => i.decode().catch(() => {}))])
+</script>
+</body>
+</html>

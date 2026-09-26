@@ -1,0 +1,364 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Vashnik — découpage</title>
+<style>
+@font-face { font-family: "Barlow Condensed"; src: url(../../production/vashnik-express/assets/fonts/barlow-condensed-700.woff2) format("woff2"); font-weight: 700; }
+@font-face { font-family: "Fira Sans"; src: url(../../production/vashnik-express/assets/fonts/fira-sans-400.woff2) format("woff2"); font-weight: 400; }
+@font-face { font-family: "Fira Sans"; src: url(../../production/vashnik-express/assets/fonts/fira-sans-500.woff2) format("woff2"); font-weight: 500; }
+@font-face { font-family: "JetBrains Mono"; src: url(../../production/vashnik-express/assets/fonts/jetbrains-mono.woff2) format("woff2"); font-weight: 100 800; }
+:root {
+  /* palette du script §2.1 : fond, panneau, cyan = technique, or = danger, une couleur par fontaine */
+  --night: #04050F; --panel: #0A0C22; --royal: #08218E; --armor: #1F3FA8; --gem: #3FB8FF;
+  --cyan: #7ADBFA; --gold: #D19A45; --marble: #EDE9E1; --muted: #A9B4C7;
+  --sang: #8E1B2E; --ombre: #6B3FA0; --flamme: #D1701F;
+  /* mêmes teintes, éclaircies pour le texte sur fond nuit */
+  --sang-t: #E0566D; --ombre-t: #B08AE8; --flamme-t: #E8893A;
+  --title: "Barlow Condensed", sans-serif; --body: "Fira Sans", sans-serif; --mono: "JetBrains Mono", monospace;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { background: #222; font-family: var(--body); color: #fff; }
+.frame { position: relative; width: 1920px; height: 1080px; overflow: hidden; background: var(--night); margin-bottom: 40px; }
+.abs { position: absolute; }
+.t { font-family: var(--title); font-weight: 700; text-transform: uppercase; letter-spacing: .02em; line-height: .92; }
+.m { font-family: var(--mono); letter-spacing: .16em; text-transform: uppercase; }
+.s { color: var(--sang-t); } .o { color: var(--ombre-t); } .f { color: var(--flamme-t); } .c { color: var(--cyan); } .d { color: var(--gold); }
+.en { color: var(--muted); font-style: italic; font-weight: 400; }
+.studio { position: absolute; inset: 0; background:
+  radial-gradient(ellipse 55% 70% at var(--hx, 30%) 42%, rgba(31,63,168,.5), transparent 70%),
+  radial-gradient(ellipse 80% 60% at 80% 110%, rgba(8,33,142,.35), transparent 70%),
+  linear-gradient(180deg, #060A24, var(--night)); }
+.dots { position: absolute; inset: 0; background-image: radial-gradient(rgba(122,219,250,.09) 1.2px, transparent 1.4px); background-size: 32px 32px; mask-image: radial-gradient(ellipse 70% 70% at 50% 50%, #000, transparent); }
+.vign { position: absolute; inset: 0; background: radial-gradient(ellipse 90% 90% at 50% 50%, transparent 55%, rgba(0,0,0,.5)); pointer-events: none; }
+.char { position: absolute; filter: drop-shadow(0 0 40px rgba(63,184,255,.22)) drop-shadow(0 30px 60px rgba(0,0,0,.6)); }
+.tag { position: absolute; right: 24px; bottom: 16px; font: 500 12px var(--mono); letter-spacing: .18em; color: rgba(255,255,255,.6); background: rgba(4,5,15,.8); padding: 5px 10px; border-radius: 3px; z-index: 20; }
+.chapter { position: absolute; left: 80px; top: 60px; display: flex; align-items: center; gap: 16px; z-index: 5; }
+.chapter .dia { width: 16px; height: 16px; transform: rotate(45deg); background: var(--gem); box-shadow: 0 0 14px var(--gem); }
+.chapter .a { font: 700 30px var(--title); letter-spacing: .06em; text-transform: uppercase; }
+.chapter .sep { width: 1px; height: 26px; background: rgba(169,180,199,.5); }
+.chapter .b { font: 500 16px var(--mono); letter-spacing: .2em; color: var(--muted); text-transform: uppercase; }
+.prog { display: flex; gap: 5px; margin-left: 10px; } .prog i { width: 20px; height: 4px; background: rgba(169,180,199,.22); } .prog i.on { background: var(--cyan); }
+.badge { position: absolute; right: 80px; top: 56px; display: flex; gap: 10px; z-index: 5; }
+.pill { font: 600 15px var(--mono); letter-spacing: .2em; padding: 9px 16px; border-radius: 3px; border: 1px solid rgba(169,180,199,.45); color: var(--marble); background: rgba(10,12,34,.75); }
+.pill.myth { border-color: var(--cyan); background: linear-gradient(135deg, var(--royal), var(--armor)); box-shadow: 0 0 20px rgba(63,184,255,.35); color: #fff; }
+.lower { position: absolute; left: 80px; bottom: 150px; display: flex; background: linear-gradient(90deg, rgba(10,12,34,.94), rgba(10,12,34,.75)); border-bottom: 2px solid var(--gold); box-shadow: 0 18px 40px rgba(0,0,0,.5); z-index: 6; }
+.lower .bar { width: 8px; background: linear-gradient(#FFE982, var(--gold)); }
+.lower .txt { padding: 14px 24px 14px 20px; }
+.lower .n { font: 700 52px var(--title); letter-spacing: .04em; line-height: 1; }
+.lower .r { font: 500 14px var(--mono); letter-spacing: .22em; color: var(--muted); margin-top: 6px; }
+.wave { display: flex; align-items: center; gap: 4px; padding: 0 22px 0 4px; }
+.wave i { width: 4px; border-radius: 2px; background: var(--gem); box-shadow: 0 0 8px rgba(63,184,255,.6); }
+.scrim { position: absolute; left: 0; right: 0; bottom: 0; height: 230px; background: linear-gradient(transparent, rgba(4,5,15,.82)); z-index: 6; }
+.caption { position: absolute; left: 120px; right: 120px; bottom: 58px; text-align: center; font: 500 38px/1.3 var(--body); text-shadow: 0 2px 10px rgba(0,0,0,.9); z-index: 7; }
+.tv { position: absolute; border: 2px solid var(--gold); background: var(--panel); box-shadow: 0 30px 80px rgba(0,0,0,.6); overflow: visible; z-index: 4; }
+.tv .head { position: absolute; left: -2px; right: -2px; top: -44px; height: 44px; display: flex; align-items: center; gap: 12px; padding: 0 16px; background: linear-gradient(90deg, var(--gold), #9C6E2B); color: var(--night); font: 700 24px var(--title); letter-spacing: .08em; text-transform: uppercase; }
+.tv .head .live { width: 12px; height: 12px; border-radius: 50%; background: var(--night); }
+.tv .head .r { margin-left: auto; font: 600 14px var(--mono); letter-spacing: .18em; }
+.tv .body { position: absolute; inset: 0; overflow: hidden; }
+.fields { position: absolute; display: flex; gap: 12px; z-index: 4; }
+.fields > div { flex: 1; padding: 14px 18px; background: rgba(10,12,34,.9); border-top: 2px solid var(--cyan); }
+.fields .k { font: 500 13px var(--mono); letter-spacing: .18em; color: var(--muted); text-transform: uppercase; }
+.fields .v { font: 500 24px/1.25 var(--body); margin-top: 4px; }
+.panel { position: absolute; background: linear-gradient(160deg, rgba(20,28,74,.92), rgba(10,12,34,.94)); border: 1px solid rgba(169,180,199,.25); border-radius: 6px; }
+.block { position: absolute; padding: 22px 28px; background: rgba(4,5,15,.86); border-left: 5px solid var(--c, var(--cyan)); font: 500 30px/1.4 var(--body); color: var(--c, var(--cyan)); z-index: 5; }
+.block .k { font: 500 13px var(--mono); letter-spacing: .2em; color: var(--muted); margin-bottom: 8px; }
+.spell { position: absolute; padding: 18px 22px; background: rgba(10,12,34,.94); border: 1px solid var(--bc, rgba(122,219,250,.5)); border-radius: 6px; z-index: 5; }
+.spell .n { font: 700 32px var(--title); text-transform: uppercase; letter-spacing: .03em; color: var(--nc, var(--cyan)); }
+.spell .n span { font: italic 400 20px var(--body); color: var(--muted); text-transform: none; letter-spacing: 0; margin-left: 8px; }
+.spell .v { font: 500 23px/1.4 var(--body); margin-top: 6px; color: var(--marble); }
+.spell .v b { font-weight: 500; color: var(--cyan); }
+.chip { display: inline-flex; align-items: center; gap: 8px; padding: 8px 14px; border-radius: 999px; background: rgba(10,12,34,.85); border: 1px solid rgba(122,219,250,.45); font: 600 15px var(--mono); letter-spacing: .14em; color: var(--cyan); text-transform: uppercase; }
+.bigrule { font: 700 88px var(--title); text-transform: uppercase; letter-spacing: .02em; line-height: .95; }
+table.recap { border-collapse: collapse; width: 100%; }
+table.recap td { padding: 20px 24px; border-bottom: 1px solid rgba(169,180,199,.2); font: 400 25px/1.4 var(--body); vertical-align: top; }
+table.recap td:first-child { width: 250px; font: 700 28px var(--title); text-transform: uppercase; letter-spacing: .04em; color: var(--cyan); }
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script>
+const NS = 'http://www.w3.org/2000/svg'
+const FC = { S: '#8E1B2E', O: '#6B3FA0', F: '#D1701F' }                    // fontaines (remplissage)
+const FT = { S: '#E0566D', O: '#B08AE8', F: '#E8893A' }                    // fontaines (texte)
+const FN = { S: 'SANG', O: 'OMBRE', F: 'FLAMME' }
+const ANG = { S: -150, O: -30, F: 90 }
+const rad = d => d * Math.PI / 180
+const pt = (cx, cy, r, a) => [cx + Math.cos(rad(a)) * r, cy + Math.sin(rad(a)) * r]
+const SEQ = ['Accroche', 'La salle', 'Les venins', 'Les fontaines', 'Les infections', 'Permanentes', 'Mythique', 'Plan de raid']
+
+/* plan de salle vu de dessus : trois tiers, trois fontaines, la Cavité au centre */
+function room(o) {
+  const { W, H, R } = o, cx = o.cx ?? W / 2, cy = o.cy ?? H / 2, u = R / 100
+  let s = `<svg width="${W}" height="${H}" viewBox="0 0 ${W} ${H}" style="position:absolute;left:0;top:0;overflow:visible"><defs>`
+  for (const f of 'SOF') s += `<radialGradient id="g${f}${o.id}"><stop offset="0" stop-color="#fff" stop-opacity=".9"/><stop offset=".35" stop-color="${FT[f]}"/><stop offset="1" stop-color="${FC[f]}"/></radialGradient>`
+  s += `<radialGradient id="cav${o.id}"><stop offset="0" stop-color="#1a0d10"/><stop offset=".7" stop-color="#07040a"/><stop offset="1" stop-color="#2a1a08"/></radialGradient>
+    <marker id="ar${o.id}" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M0 0L10 5L0 10z" fill="#EDE9E1"/></marker></defs>`
+  s += `<circle cx="${cx}" cy="${cy}" r="${R + 6 * u}" fill="#070918" stroke="rgba(169,180,199,.35)" stroke-width="${1.2 * u}"/>`
+  for (const f of 'SOF') {                                                  // les tiers
+    const a0 = ANG[f] - 60, a1 = ANG[f] + 60, [x0, y0] = pt(cx, cy, R, a0), [x1, y1] = pt(cx, cy, R, a1)
+    const on = (o.glow || '').includes(f)
+    s += `<path d="M${cx} ${cy}L${x0} ${y0}A${R} ${R} 0 0 1 ${x1} ${y1}Z" fill="${FC[f]}" fill-opacity="${on ? .34 : .17}" stroke="#04050F" stroke-width="${1.5 * u}"/>`
+  }
+  for (const a of [-90, 30, 150]) { const [x, y] = pt(cx, cy, R, a); s += `<line x1="${cx}" y1="${cy}" x2="${x}" y2="${y}" stroke="rgba(237,233,225,.18)" stroke-width="${.6 * u}" stroke-dasharray="${2 * u} ${2 * u}"/>` }
+  for (const f of 'SOF') {                                                  // les fontaines
+    const [x, y] = pt(cx, cy, R * .74, ANG[f]), on = (o.glow || '').includes(f)
+    if (on) s += `<circle cx="${x}" cy="${y}" r="${20 * u}" fill="${FT[f]}" fill-opacity=".18" stroke="${FT[f]}" stroke-width="${.8 * u}"/>`
+    s += `<circle cx="${x}" cy="${y}" r="${11 * u}" fill="url(#g${f}${o.id})" stroke="#EDE9E1" stroke-opacity=".7" stroke-width="${.8 * u}"/>`
+    if (o.labels !== false) { const [lx, ly] = pt(cx, cy, R * .74 + (f === 'F' ? -25 : 21) * u, ANG[f]); s += `<text x="${lx}" y="${ly + 4 * u}" text-anchor="middle" font-family="Barlow Condensed" font-weight="700" font-size="${9 * u}" letter-spacing="${.6 * u}" fill="${FT[f]}">${FN[f]}</text>` }
+  }
+  if (o.drain && o.boss) {                                                  // Absorption : le boss boit
+    const [bx, by] = o.boss
+    for (const f of o.glow) { const [x, y] = pt(cx, cy, R * .74, ANG[f]); s += `<path d="M${x} ${y}Q${(x + bx) / 2 + (cy - by) * .2} ${(y + by) / 2} ${bx} ${by}" fill="none" stroke="${FT[f]}" stroke-width="${2.2 * u}" stroke-dasharray="${3 * u} ${2.5 * u}" opacity=".9"/>` }
+  }
+  s += `<circle cx="${cx}" cy="${cy}" r="${14 * u}" fill="url(#cav${o.id})" stroke="#D19A45" stroke-width="${1.2 * u}" stroke-dasharray="${2.5 * u} ${1.8 * u}"/>`
+  s += `<circle cx="${cx}" cy="${cy}" r="${19 * u}" fill="none" stroke="#D19A45" stroke-opacity=".35" stroke-width="${.6 * u}"/>`
+  if (o.labels !== false && !o.noCavLabel) s += `<text x="${cx}" y="${cy + 29 * u}" text-anchor="middle" font-family="JetBrains Mono" font-weight="600" font-size="${4.2 * u}" letter-spacing="${.8 * u}" fill="#D19A45">CAVITÉ MALVEILLANTE</text>`
+  for (const v of o.venins || []) {                                         // venins qui rampent vers le centre
+    const [fx, fy] = pt(cx, cy, R * .74, ANG[v.f]), ex = cx + (fx - cx) * .22, ey = cy + (fy - cy) * .22
+    const x = fx + (ex - fx) * v.t, y = fy + (ey - fy) * v.t
+    s += `<line x1="${fx}" y1="${fy}" x2="${x}" y2="${y}" stroke="${FT[v.f]}" stroke-opacity=".55" stroke-width="${1.2 * u}" stroke-dasharray="${1 * u} ${2 * u}"/>`
+    s += `<line x1="${x}" y1="${y}" x2="${x + (ex - x) * .45}" y2="${y + (ey - y) * .45}" stroke="#EDE9E1" stroke-width="${1.2 * u}" marker-end="url(#ar${o.id})"/>`
+    s += `<circle cx="${x}" cy="${y}" r="${5.5 * u}" fill="${FT[v.f]}" stroke="#fff" stroke-width="${.8 * u}"/>`
+    if (v.lab) s += `<text x="${x}" y="${y + 13 * u}" text-anchor="middle" font-family="JetBrains Mono" font-weight="600" font-size="${4 * u}" fill="#EDE9E1">${v.lab}</text>`
+  }
+  for (const t of o.tum || []) {                                            // tumeurs (Mythique)
+    const x = cx + t[0] * u, y = cy + t[1] * u, k = 6 * u
+    let p = ''; for (let i = 0; i < 16; i++) { const rr = i % 2 ? k * .5 : k; p += `${i ? 'L' : 'M'}${x + Math.cos(i * Math.PI / 8) * rr} ${y + Math.sin(i * Math.PI / 8) * rr}` }
+    s += `<path d="${p}Z" fill="#2a1a08" stroke="#D19A45" stroke-width="${1 * u}"/>`
+    if (t[2]) s += `<path d="M${x - k} ${y - k}L${x + k} ${y + k}M${x + k} ${y - k}L${x - k} ${y + k}" stroke="#7ADBFA" stroke-width="${1.6 * u}"/>`
+  }
+  for (const m of o.marked || []) {                                         // joueurs marqués : vagues en croix
+    const x = cx + m[0] * u, y = cy + m[1] * u, L = m[2] * u
+    for (const [dx, dy] of [[1, 0], [-1, 0], [0, 1], [0, -1]]) s += `<line x1="${x}" y1="${y}" x2="${x + dx * L}" y2="${y + dy * L}" stroke="#7ADBFA" stroke-opacity=".45" stroke-width="${4 * u}" stroke-linecap="round"/>`
+    s += `<circle cx="${x}" cy="${y}" r="${3.6 * u}" fill="#EDE9E1" stroke="#7ADBFA" stroke-width="${1.2 * u}"/>`
+  }
+  for (const p of o.raid || []) s += `<circle cx="${cx + p[0] * u}" cy="${cy + p[1] * u}" r="${2.6 * u}" fill="#EDE9E1" stroke="#04050F" stroke-width="${.6 * u}"/>`
+  s += '</svg>'
+  if (o.boss) { const [bx, by] = o.boss, h = (o.bossH || 44) * u; s += `<img src="detourages/gnome-provisoire.png" style="position:absolute;left:${bx - h * .5}px;top:${by - h * .78}px;height:${h}px;filter:drop-shadow(0 0 ${3 * u}px rgba(0,0,0,.9))">` }
+  return `<div style="position:absolute;left:${o.x || 0}px;top:${o.y || 0}px;width:${W}px;height:${H}px">${s}</div>`
+}
+const bossAt = (cx, cy, R, pair) => pt(cx, cy, R * .5, { SO: -90, OF: 30, FS: 150 }[pair])
+const blob = (f, r, extra = '') => `<svg width="${r * 2.4}" height="${r * 2.4}" style="overflow:visible"><circle cx="${r * 1.2}" cy="${r * 1.2}" r="${r}" fill="${FT[f]}" stroke="#fff" stroke-width="3"/><circle cx="${r * .85}" cy="${r * .85}" r="${r * .28}" fill="#fff" opacity=".45"/>${extra}</svg>`
+
+// composants
+const chapter = (n, sub) => `<div class="chapter"><div class="dia"></div><div class="a">${String(n).padStart(2, '0')} · ${SEQ[n - 1]}</div>${sub ? `<div class="sep"></div><div class="b">${sub}</div>` : ''}<div class="prog">${SEQ.map((_, i) => `<i class="${i < n ? 'on' : ''}"></i>`).join('')}</div></div>`
+const badge = () => `<div class="badge"><span class="pill">VASHNIK</span><span class="pill myth">MYTHIQUE</span></div>`
+const wave = n => `<div class="wave">${Array.from({ length: n }, (_, i) => `<i style="height:${8 + Math.abs(Math.sin(i * 1.7) * Math.cos(i * .6)) * 32}px"></i>`).join('')}</div>`
+const lower = () => `<div class="lower"><div class="bar"></div><div class="txt"><div class="n">GIDEON</div><div class="r">COACH DE RAID</div></div>${wave(16)}</div>`
+const caption = html => `<div class="scrim"></div><div class="caption">${html}</div>`
+const presenter = (hx = 30) => `<div class="studio" style="--hx:${hx}%"></div><div class="dots"></div><img class="char" src="../../production/vashnik-express/assets/img/gideon.png" style="left:-300px;top:250px;width:1520px;z-index:2">`
+const tag = (n, tc, what) => `<div class="tag">PLAN ${String(n).padStart(2, '0')} · ${tc} · ${what}</div>`
+const spell = (css, fr, en, v, col) => `<div class="spell" style="${css};${col ? `--bc:${col}88;--nc:${col}` : ''}"><div class="n">${fr}<span>(${en})</span></div><div class="v">${v}</div></div>`
+
+const F = []
+// 01 · carton d'intro
+F.push(`<img class="abs" src="../../production/vashnik-express/assets/img/diner.png" style="right:0;top:-40px;height:1160px">
+  <div class="abs" style="left:0;top:0;width:1300px;height:1080px;background:linear-gradient(90deg,var(--night) 38%,rgba(4,5,15,.6) 70%,transparent)"></div>
+  <div class="abs" style="left:110px;top:250px">
+    <div class="m c" style="font-size:20px">GUIDE DE BOSS · THE VENOMOUS ABYSS</div>
+    <div class="t" style="font-size:210px;margin-top:14px;color:#fff;text-shadow:0 0 60px rgba(63,184,255,.3)">Vashnik</div>
+    <div class="t" style="font-size:78px;margin-top:6px;color:var(--muted)">le Malveillant</div>
+    <div style="display:flex;gap:12px;margin-top:30px"><span class="pill myth">MYTHIQUE</span><span class="pill">PATCH 12.1</span></div>
+    <div style="font:400 28px var(--body);color:#E3E8F2;margin-top:30px">3ᵉ ou 5ᵉ boss selon votre route</div>
+  </div>
+  <div class="abs" style="left:110px;bottom:90px;display:flex;gap:12px"><span class="chip">Phase unique</span><span class="chip">2 tanks · 4 heals · 14 DPS</span><span class="chip">Héroïsme au pull</span></div>
+  ${tag(1, '0:00', 'CARTON D’INTRO')}`)
+// 02 · accroche face cam
+F.push(`${presenter()}${chapter(1, 'Face cam')}${badge()}
+  <div class="tv" style="left:1000px;top:200px;width:840px;height:472px"><div class="head"><span class="live"></span>Guide Mythique<span class="r">GIDEON AU DINER</span></div><div class="body"><img src="../../production/vashnik-express/assets/img/diner.png" style="width:100%;height:100%;object-fit:cover"></div></div>
+  <div class="fields" style="left:1000px;top:696px;width:840px"><div><div class="k">Phases</div><div class="v">Unique</div></div><div><div class="k">Composition</div><div class="v">2 · 4 · 14</div></div><div><div class="k">Héroïsme</div><div class="v">Au pull</div></div></div>
+  ${lower()}${caption('Il ne demande pas de faire de gros dégâts. Il demande de <span class="c">tenir une rotation</span>.')}
+  ${tag(2, '0:10', 'ACCROCHE · FACE CAM')}`)
+// 03 · fin de l'accroche
+F.push(`<div class="studio" style="--hx:50%"></div><div class="dots"></div>
+  <div class="abs" style="left:0;right:0;top:250px;display:flex;justify-content:center;gap:90px">${'SOF'.split('').map(f => `<div style="width:64px;height:64px;transform:rotate(45deg);background:${FT[f]};box-shadow:0 0 40px ${FT[f]}"></div>`).join('')}</div>
+  <div class="abs" style="left:0;right:0;top:420px;text-align:center">
+    <div class="t" style="font-size:120px">Il y a trois fontaines.</div>
+    <div class="t" style="font-size:120px;margin-top:10px">Trois venins.</div>
+    <div class="t d" style="font-size:120px;margin-top:10px">Une seule règle.</div>
+  </div><div class="vign"></div>
+  ${tag(3, '0:55', 'FIN DE L’ACCROCHE')}`)
+// 04 · la salle, face cam + encart
+F.push(`${presenter()}${chapter(2, 'Face cam + schéma')}${badge()}
+  <div class="tv" style="left:1000px;top:200px;width:840px;height:560px"><div class="head"><span class="live"></span>La salle<span class="r">VUE DE DESSUS</span></div><div class="body" style="background:radial-gradient(circle at 50% 50%,#101634,#0A0C22)">${room({ id: 'a', W: 840, H: 560, R: 240 })}</div></div>
+  ${lower()}${caption('Une rouge — le <span class="s">Sang</span>. Une violette — l’<span class="o">Ombre</span>. Une orange — la <span class="f">Flamme</span>.')}
+  ${tag(4, '1:05', 'LA SALLE · FACE CAM + ENCART')}`)
+// 05 · Absorption : le boss boit aux deux fontaines les plus proches
+{ const cx = 600, cy = 520, R = 350, b = bossAt(cx, cy, R, 'SO')
+F.push(`<div class="studio" style="--hx:32%"></div><div class="dots"></div>${chapter(2, 'Absorption')}${badge()}
+  ${room({ id: 'b', W: 1240, H: 1080, R, cx, cy, glow: 'SO', boss: b, drain: true, bossH: 62 })}
+  <div class="panel" style="left:1200px;top:170px;width:640px;padding:28px 32px">
+    <div class="m" style="font-size:14px;color:var(--muted)">ÉNERGIE DE VASHNIK</div>
+    <div style="margin-top:12px;height:22px;border:1px solid rgba(122,219,250,.6);padding:3px"><div style="height:100%;width:100%;background:linear-gradient(90deg,#1F3FA8,#7ADBFA)"></div></div>
+    <div style="display:flex;justify-content:space-between;margin-top:10px;font:600 20px var(--mono)"><span class="c">100 %</span><span class="c">Absorption <span class="en">(Imbibe)</span></span></div>
+    <div style="font:500 30px/1.35 var(--body);margin-top:26px">Il boit aux <span class="c">deux fontaines les plus proches</span> de sa position.</div>
+  </div>
+  <div class="panel" style="left:1200px;top:520px;width:640px;padding:26px 32px">
+    <div class="t c" style="font-size:36px">Imprégnation <span class="en" style="font:italic 400 20px var(--body);text-transform:none">(Blood/Shadow/Flame Infusion)</span></div>
+    <div style="font:400 25px/1.6 var(--body);margin-top:10px">Expulsion de la fontaine <span class="c">+100 %</span><br>Points de vie des adds <span class="c">+50 %</span><br>Durée <span class="c">90 s</span> · <span class="c">cumulable</span></div>
+  </div>
+  ${caption('Donc <span class="c">ce sont les tanks qui écrivent le combat</span>.')}
+  ${tag(5, '1:45', 'LA SALLE · PLAN DE SALLE ANIMÉ')}`) }
+// 06 · rotation des fontaines
+{ const cells = [['SO', 'S', 'O'], ['OF', 'O', 'F'], ['FS', 'F', 'S']]
+F.push(`<div class="studio" style="--hx:50%"></div><div class="dots"></div>${chapter(2, 'Rotation')}${badge()}
+  ${cells.map(([p], i) => { const W = 520, H = 480, R = 200, b = bossAt(W / 2, H / 2, R, p); return room({ id: 'r' + i, x: 90 + i * 590, y: 150, W, H, R, glow: p, boss: b, drain: true, bossH: 58, labels: true, noCavLabel: true }) }).join('')}
+  ${[0, 1].map(i => `<div class="abs t" style="left:${608 + i * 590}px;top:350px;font-size:80px;color:var(--muted)">→</div>`).join('')}
+  <div class="block" style="left:240px;top:700px;right:240px;text-align:center;border-left:none;border-top:4px solid var(--cyan)">
+    <div class="k">ROTATION PAR DÉFAUT</div>
+    <span class="s">SANG</span> + <span class="o">OMBRE</span> → <span class="o">OMBRE</span> + <span class="f">FLAMME</span> → <span class="f">FLAMME</span> + <span class="s">SANG</span> → …<br><span style="color:var(--marble)">Une seule nouvelle fontaine par cycle.</span>
+  </div>
+  <div class="abs" style="right:80px;top:130px"><span class="chip" style="border-color:var(--gold);color:var(--gold)">Vapeur toxique · +1 pile par Absorption · permanente</span></div>
+  ${caption('C’est pour ça qu’on ne tankera jamais le boss deux fois de suite sur la même fontaine. On tourne.')}
+  ${tag(6, '2:30', 'LA SALLE · ROTATION')}`) }
+// 07 · les venins rampent vers la Cavité
+{ const cx = 600, cy = 520, R = 350
+F.push(`<div class="studio" style="--hx:32%"></div><div class="dots"></div>${chapter(3, 'Voix off')}${badge()}
+  ${room({ id: 'c', W: 1240, H: 1080, R, cx, cy, glow: 'SO', venins: [{ f: 'S', t: .35 }, { f: 'S', t: .62, lab: '0:42' }, { f: 'O', t: .5 }, { f: 'O', t: .85, lab: '0:58' }] })}
+  <div class="block" style="--c:var(--gold);left:1200px;top:170px;width:640px;font-size:34px">
+    <div class="k">SI UN VENIN ATTEINT LE CENTRE</div>
+    1 venin → survivable<br>2 venins → <span class="t" style="font-size:44px">WIPE</span>
+  </div>
+  ${spell('left:1200px;top:430px;width:640px', 'Explosion malveillante', 'Malignant Burst', '<b>1 666 813</b> Nature sur tout le raid<br>puis <b>333 363</b> / 3 s pendant <b>30 s</b>, cumulable', '#D19A45')}
+  ${spell('left:1200px;top:640px;width:640px', 'Venin durci', 'Hardened Venom', 'Après <b>60 s</b> : insensible aux contrôles,<br><b>+50 %</b> vitesse de déplacement')}
+  ${caption('Un venin qui passe, c’est sauvable avec des gros cooldowns. <span class="d">Deux, c’est un wipe.</span>')}
+  ${tag(7, '3:30', 'LES VENINS · VOIX OFF SUR SCHÉMA')}`) }
+// 08 · fontaine de Sang, face cam + vignette
+F.push(`${presenter()}${chapter(4, 'Sang')}${badge()}
+  <div class="tv" style="left:1000px;top:200px;width:840px;height:420px"><div class="head" style="background:linear-gradient(90deg,var(--sang),#5a0f1c);color:#fff"><span class="live" style="background:#fff"></span>Venin coagulant<span class="r">VIGNETTE</span></div>
+    <div class="body" style="background:radial-gradient(circle at 50% 50%,#1a0a14,#0A0C22);display:flex;align-items:center;justify-content:center;gap:34px">
+      <div style="text-align:center">${blob('S', 62)}<div class="m" style="font-size:14px;color:var(--muted);margin-top:6px">VENIN</div></div>
+      <div class="t" style="font-size:60px;color:var(--muted)">→</div>
+      <div style="text-align:center;display:flex;flex-direction:column;gap:8px">${blob('S', 34)}${blob('S', 34)}</div>
+      <div class="t" style="font-size:60px;color:var(--muted)">→</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px">${blob('S', 20)}${blob('S', 20)}${blob('S', 20)}${blob('S', 20)}</div>
+      <div class="m" style="font-size:14px;color:var(--muted);align-self:flex-end;margin-bottom:60px">CAILLOTS</div>
+    </div></div>
+  <div class="fields" style="left:1000px;top:644px;width:840px"><div style="border-top-color:var(--sang-t)"><div class="k">Contrôles</div><div class="v"><span class="s">Robustesse sanguine</span> : insensible</div></div><div style="border-top-color:var(--sang-t)"><div class="k">À sa mort</div><div class="v">Il se divise en caillots</div></div></div>
+  ${lower()}${caption('Quand il meurt, <span class="s">il se divise</span>. Il laisse des caillots plus petits qu’il faut tuer aussi.')}
+  ${tag(8, '4:30', 'FONTAINE DE SANG · FACE CAM + VIGNETTE')}`)
+// 09 · fontaine d'Ombre, vignette
+{ const shield = r => `<rect x="${r * .2}" y="${-r * .1}" width="${r * 2}" height="10" rx="3" fill="#7ADBFA"/>`
+F.push(`<div class="studio" style="--hx:50%"></div><div class="dots"></div>${chapter(4, 'Ombre')}${badge()}
+  <div class="panel" style="left:80px;top:150px;width:860px;height:640px;padding:30px 34px">
+    <div class="t o" style="font-size:52px">Venin embrumé</div>
+    <div class="m" style="font-size:14px;color:var(--muted);margin-top:8px">PAR PAQUETS DE 5 · CONTRÔLABLE · DÉGÂTS DE ZONE</div>
+    <div style="display:flex;gap:18px;margin-top:40px;justify-content:center">${Array.from({ length: 5 }, () => `<div style="text-align:center">${blob('O', 52, shield(52))}<div style="height:10px;margin:6px 8px 0;background:linear-gradient(90deg,#7ADBFA 50%,#B08AE8 50%)"></div></div>`).join('')}</div>
+    <div style="margin-top:34px;font:500 30px/1.4 var(--body)"><span class="o">Couche miasmatique</span> <span class="en" style="font-size:22px">(Miasmic Coating)</span><br>absorption = <span class="c">100 % de ses PV</span> → <span class="c">on le tue deux fois</span></div>
+  </div>
+  <div class="panel" style="left:980px;top:150px;width:860px;height:640px;padding:30px 34px">
+    <div class="t" style="font-size:40px">Où le tuer</div>
+    <div style="display:flex;gap:26px;margin-top:26px">
+      ${[['✓ LOIN DU RAID', true], ['✗ DANS LE RAID', false]].map(([lab, ok]) => `<div style="flex:1;height:360px;border:1px solid ${ok ? 'rgba(122,219,250,.6)' : 'rgba(209,154,69,.6)'};border-radius:6px;position:relative;background:#070918">
+        <svg width="380" height="360" style="position:absolute;left:0;top:0">${Array.from({ length: 10 }, (_, i) => `<circle cx="${70 + (i % 5) * 34}" cy="${230 + Math.floor(i / 5) * 34}" r="9" fill="#EDE9E1"/>`).join('')}
+          ${(ok ? [[300, 80], [330, 120], [280, 130]] : [[110, 240], [170, 260], [220, 230]]).map(([x, y]) => `<circle cx="${x}" cy="${y}" r="34" fill="#6B3FA0" fill-opacity=".45" stroke="#B08AE8" stroke-width="2"/>`).join('')}</svg>
+        <div class="m" style="position:absolute;left:14px;top:12px;font-size:15px;color:${ok ? 'var(--cyan)' : 'var(--gold)'}">${lab}</div></div>`).join('')}
+    </div>
+    <div style="margin-top:22px;font:500 24px/1.4 var(--body)"><span class="o">Éjection ombreuse</span> <span class="en" style="font-size:20px">(Umbral Ejection)</span> : <span class="c">541 714</span> Ombre dans <span class="c">3 m</span></div>
+  </div>
+  ${caption('Vous le tuez <span class="o">là où vous voulez que les flaques tombent</span>, pas là où il se trouve.')}
+  ${tag(9, '5:40', 'FONTAINE D’OMBRE · VIGNETTE')}`) }
+// 10 · fontaine de Flamme
+F.push(`<div class="studio" style="--hx:70%"></div><div class="dots"></div>${chapter(4, 'Flamme')}${badge()}
+  <div class="abs" style="left:80px;top:170px">
+    <div class="m d" style="font-size:18px">LA RÈGLE NON NÉGOCIABLE</div>
+    <div class="bigrule d" style="margin-top:14px"><span class="f">Flamme</span> = priorité 1</div>
+    <div style="font:500 36px/1.35 var(--body);margin-top:20px;color:var(--gold);max-width:1000px">Ne jamais laisser deux venins brûlants mourir ensemble.</div>
+  </div>
+  <div class="panel" style="left:80px;top:470px;width:1060px;height:340px;display:flex;align-items:center;justify-content:space-around;padding:0 40px">
+    <div style="text-align:center">${blob('F', 70, '<g stroke="#7ADBFA" stroke-width="5" fill="none"><circle cx="84" cy="84" r="86" stroke-dasharray="10 8"/></g>')}<div class="m c" style="font-size:16px;margin-top:10px">① CONTRÔLÉ</div></div>
+    <div class="t" style="font-size:44px;color:var(--muted);text-align:center">puis<br>on échange</div>
+    <div style="text-align:center;opacity:.95">${blob('F', 70)}<div style="width:150px;height:12px;margin:10px auto 0;border:1px solid #E8893A"><div style="width:18%;height:100%;background:#E8893A"></div></div><div class="m f" style="font-size:16px;margin-top:8px">② EN TRAIN DE MOURIR</div></div>
+  </div>
+  <div class="tv" style="left:1220px;top:210px;width:620px;height:348px"><div class="head"><span class="live"></span>Chut<span class="r">GIDEON</span></div><div class="body"><img src="../../production/vashnik-express/assets/img/chut.png" style="width:100%;height:100%;object-fit:cover;object-position:50% 30%"></div></div>
+  ${spell('left:1220px;top:590px;width:620px', 'Présence brûlante', 'Burning Presence', '<b>37 503</b> Feu sur le raid toutes les <b>3 s</b>, tant qu’il vit', '#E8893A')}
+  ${spell('left:1220px;top:760px;width:620px', 'Afflux caustique', 'Caustic Surge', 'À sa mort : <b>100 009</b> Feu raid + <b>83 341</b> / 1 s pendant 3 s, cumulable', '#E8893A')}
+  ${caption('On contrôle le premier pendant qu’on tue le second. <span class="d">Jamais les deux ensemble.</span>')}
+  ${tag(10, '6:45', 'FONTAINE DE FLAMME · RÈGLE + VIGNETTE')}`)
+// 11 · les infections : trois directions
+{ const col = (x, f, name, en, svg, rule, myth) => `<div class="panel" style="left:${x}px;top:150px;width:560px;height:700px;padding:28px 30px;border-top:4px solid ${FT[f]}">
+    <div class="t" style="font-size:44px;color:${FT[f]}">${name}</div><div class="en" style="font-size:20px">(${en})</div>
+    <div style="height:320px;margin-top:18px;background:#070918;border-radius:6px;position:relative">${svg}</div>
+    <div style="font:500 29px/1.35 var(--body);margin-top:22px;color:${FT[f]}">${rule}</div>
+    ${myth ? `<div class="m" style="font-size:14px;color:var(--muted);margin-top:14px;line-height:1.6">${myth}</div>` : ''}</div>`
+  const P = (x, y, c = '#EDE9E1') => `<circle cx="${x}" cy="${y}" r="10" fill="${c}"/>`
+  const sang = `<svg width="500" height="320">${`<circle cx="250" cy="160" r="110" fill="#8E1B2E" fill-opacity=".25" stroke="#E0566D" stroke-width="3"/>`}${P(250, 160, '#E0566D')}<circle cx="250" cy="160" r="18" fill="none" stroke="#fff" stroke-width="3"/>${[[190, 110], [310, 120], [180, 200], [320, 205], [250, 240], [230, 90], [290, 70]].map(([x, y]) => P(x, y)).join('')}${[[200, 150, 235, 157], [300, 130, 265, 150], [250, 225, 250, 180]].map(([a, b, c, d]) => `<line x1="${a}" y1="${b}" x2="${c}" y2="${d}" stroke="#E0566D" stroke-width="2.5" stroke-dasharray="5 4"/>`).join('')}</svg>`
+  const ombre = `<svg width="500" height="320">${[[110, 90], [390, 90], [250, 250]].map(([x, y]) => `<circle cx="${x}" cy="${y}" r="62" fill="#6B3FA0" fill-opacity=".22" stroke="#B08AE8" stroke-width="3" stroke-dasharray="8 6"/>${P(x, y, '#B08AE8')}<text x="${x}" y="${y - 70}" text-anchor="middle" font-family="JetBrains Mono" font-size="15" fill="#B08AE8">3,5 m</text>`).join('')}${[[250, 120], [230, 150], [270, 150]].map(([x, y]) => P(x, y)).join('')}</svg>`
+  const flamme = `<svg width="500" height="320"><line x1="40" y1="170" x2="460" y2="170" stroke="rgba(169,180,199,.5)" stroke-width="3"/>${[90, 250, 410].map((x, i) => `<rect x="${x - 34}" y="136" width="68" height="68" rx="8" fill="#D1701F" fill-opacity=".3" stroke="#E8893A" stroke-width="3"/><text x="${x}" y="182" text-anchor="middle" font-family="Barlow Condensed" font-weight="700" font-size="34" fill="#fff">${i + 1}</text>`).join('')}<text x="40" y="110" font-family="JetBrains Mono" font-size="16" fill="#A9B4C7">DISSIPATIONS DANS LE TEMPS →</text><text x="40" y="262" font-family="JetBrains Mono" font-size="16" fill="#D19A45">JAMAIS SUR UN RAID BAS</text></svg>`
+F.push(`<div class="studio" style="--hx:50%"></div><div class="dots"></div>${chapter(5, 'Trois directions')}${badge()}
+  ${col(80, 'S', 'Siphonnante', 'Siphoning Infection', sang, 'On se rapproche : il faut des corps dans le cercle.', 'Soins reçus −100 %<br>Mythique : saignement ≈ ×5')}
+  ${col(680, 'O', 'Stygienne', 'Stygian Infection', ombre, 'On s’écarte. Cercle de 3,5 m : personne dedans.', 'Explosion stygienne : 583 385 Ombre')}
+  ${col(1280, 'F', 'Explosive', 'Exploding Infection', flamme, 'On étale les dissipations. Jamais sur un raid bas.', 'Dissipation → 233 354 Feu sur le raid<br>Mythique : +1 pile toutes les 1,5 s')}
+  ${caption('Ces trois infections se jouent dans <span class="c">trois directions différentes</span>.')}
+  ${tag(11, '7:45', 'LES INFECTIONS · TROIS MINI-SCHÉMAS')}`) }
+// 12 · permanentes ① Crochets dégoulinants
+F.push(`<div class="studio" style="--hx:70%"></div><div class="dots"></div>${chapter(6, '① Côté tanks')}${badge()}
+  <img class="char" src="../../production/vashnik-express/assets/img/ingenieur.png" style="left:1080px;top:150px;height:900px">
+  <div class="abs" style="left:1130px;top:140px"><span class="chip">Côté tanks</span></div>
+  <div class="abs" style="left:80px;top:180px;display:flex;gap:10px">${['①', '②', '③', '④'].map((n, i) => `<div class="t" style="width:54px;height:54px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:32px;${i ? 'color:var(--muted);border:1px solid rgba(169,180,199,.3)' : 'background:var(--cyan);color:var(--night)'}">${i + 1}</div>`).join('')}</div>
+  <div class="abs" style="left:80px;top:280px;width:950px">
+    <div class="t c" style="font-size:100px">Crochets dégoulinants</div>
+    <div class="en" style="font-size:28px;margin-top:8px">(Dripping Fangs) · le tankbuster</div>
+    <div style="font:400 30px/1.6 var(--body);margin-top:30px"><span class="c">2 083 514</span> Physique, puis un saignement<br>et surtout <span class="d">+200 % de dégâts physiques subis</span></div>
+    <div class="t" style="font-size:72px;margin-top:36px;padding:14px 26px;border:3px solid var(--cyan);display:inline-block">Swap à chaque cast</div>
+  </div>
+  ${caption('On ne tanke pas ça deux fois. <span class="c">Swap systématique à chaque cast.</span>')}
+  ${tag(12, '9:00', 'PERMANENTES ① · CARTON 15 S + CHROMA INGÉNIEUR')}`)
+// 13 · permanentes ② Écume pestilentielle
+{ const X = 460, Y = 470
+F.push(`<div class="studio" style="--hx:30%"></div><div class="dots"></div>${chapter(6, '② Tout le monde')}${badge()}
+  <div class="panel" style="left:80px;top:150px;width:820px;height:700px">
+    <svg width="820" height="700" style="position:absolute;left:0;top:0">
+      ${[[1, 0], [-1, 0], [0, 1], [0, -1]].map(([dx, dy]) => `<line x1="${X - 80}" y1="${Y - 150}" x2="${X - 80 + dx * 330}" y2="${Y - 150 + dy * 330}" stroke="#7ADBFA" stroke-opacity=".38" stroke-width="44" stroke-linecap="round"/>`).join('')}
+      <circle cx="${X - 80}" cy="${Y - 150}" r="16" fill="#EDE9E1" stroke="#7ADBFA" stroke-width="5"/>
+      ${[[-190, -120], [150, -115], [-180, 150], [160, 155], [-120, -200], [110, 190]].map(([x, y]) => `<circle cx="${X - 80 + x}" cy="${Y - 150 + y}" r="12" fill="#EDE9E1"/>`).join('')}
+      <circle cx="${X - 80 + 200}" cy="${Y - 150}" r="12" fill="#D19A45"/><text x="${X - 80 + 200}" y="${Y - 150 - 26}" text-anchor="middle" font-family="JetBrains Mono" font-size="16" fill="#D19A45">✗ SUR L’AXE</text>
+      <text x="${X - 80 - 190}" y="${Y - 150 - 150}" text-anchor="middle" font-family="JetBrains Mono" font-size="16" fill="#7ADBFA">✓ ENTRE LES AXES</text>
+    </svg></div>
+  <div class="abs" style="left:980px;top:170px;width:860px">
+    <div class="t c" style="font-size:90px">Écume pestilentielle</div>
+    <div class="en" style="font-size:26px;margin-top:6px">(Plague Froth) · quatre vagues en croix</div>
+    <div style="font:500 32px/1.7 var(--body);margin-top:30px">1 · Les marqués <span class="c">s’écartent du raid</span><br>2 · Tout le monde <span class="c">entre les axes</span>, jamais dessus<br>3 · Marqué : <span class="c">on ne bouge pas</span></div>
+  </div>
+  ${spell('left:980px;top:640px;width:860px', 'Vague de peste', 'Plague Wave', '<b>666 725</b> peste · Mythique : <b>détruit les Tumeurs</b>')}
+  ${caption('Les marqués s’écartent du raid, et tout le monde <span class="c">se place entre les axes</span>.')}
+  ${tag(13, '9:15', 'PERMANENTES ② · CARTON 15 S')}`) }
+// 14 · Mythique : les tumeurs
+{ const cx = 600, cy = 520, R = 350
+F.push(`<div class="studio" style="--hx:32%"></div><div class="dots"></div>${chapter(7, 'Les tumeurs')}${badge()}
+  ${room({ id: 't', W: 1240, H: 1080, R, cx, cy, labels: true, noCavLabel: true, tum: [[-50, -62, 1], [-50, 30, 1], [40, -62, 1], [60, 52], [-18, 76, 1]], marked: [[-50, -14, 64], [40, -28, 42], [-18, 40, 44]], raid: [[70, 0], [82, 18], [66, -2], [-78, 55], [-82, 38], [20, 60]] })}
+  <div class="block" style="--c:var(--gold);left:1200px;top:170px;width:640px;font-size:32px"><div class="k">MYTHIQUE</div>Tumeurs non détruites = Malveillance cumulable = wipe à retardement</div>
+  ${spell('left:1200px;top:430px;width:640px', 'Malveillance', 'Malignance', '<b>666 725</b> Nature sur le raid, puis <b>208 352</b> / 2 s pendant <b>1 min</b>, cumulable', '#D19A45')}
+  <div class="panel" style="left:1200px;top:640px;width:640px;padding:24px 30px;font:500 28px/1.45 var(--body)">Les vagues d’<span class="c">Écume pestilentielle</span> <span class="c">détruisent les tumeurs</span> : les marqués <span class="c">orientent</span> leurs vagues.</div>
+  ${caption('La mécanique que vous appreniez à esquiver devient <span class="c">votre seul outil pour détruire les tumeurs</span>.')}
+  ${tag(14, '10:50', 'MYTHIQUE · PLAN DE SALLE + TUMEURS')}`) }
+// 15 · le plan de raid
+F.push(`<div class="studio" style="--hx:80%"></div><div class="dots"></div>${chapter(8, 'Récap')}${badge()}
+  <img class="char" src="../../production/vashnik-express/assets/img/gideon.png" style="left:960px;top:330px;width:1400px">
+  <div class="panel" style="left:80px;top:150px;width:1180px;padding:18px 26px;z-index:3">
+    <div class="t" style="font-size:52px;padding:10px 24px 14px">Le plan, en cinq lignes</div>
+    <table class="recap">
+      <tr><td>Avant l’Absorption</td><td>Les tanks amènent le boss sur la <span class="c">nouvelle</span> fontaine prévue.</td></tr>
+      <tr><td>Tanks</td><td>Swap à <span class="c">chaque</span> Crochet dégoulinant. Le positionnement est votre responsabilité.</td></tr>
+      <tr><td>Tous</td><td>Chaque venin meurt <span class="d">avant le centre</span>. Contrôler la <span class="f">Flamme</span>, brûler le <span class="s">Sang</span> jusqu’aux caillots, finir l’<span class="o">Ombre</span>.</td></tr>
+      <tr><td>Infections</td><td><span class="s">Sang</span> → on se rapproche · <span class="o">Ombre</span> → on s’écarte · <span class="f">Flamme</span> → on étale les dissipations.</td></tr>
+      <tr><td>Mythique</td><td>Les vagues d’Écume <span class="c">détruisent les tumeurs</span>. On oriente, on ne subit pas.</td></tr>
+    </table>
+  </div>
+  ${tag(15, '11:30', 'PLAN DE RAID · TABLEAU + FACE CAM')}`)
+// 16 · carton de fin
+F.push(`<img class="abs" src="../../production/vashnik-express/assets/img/diner.png" style="right:0;top:-40px;height:1160px">
+  <div class="abs" style="left:0;top:0;width:1300px;height:1080px;background:linear-gradient(90deg,var(--night) 38%,rgba(4,5,15,.6) 70%,transparent)"></div>
+  <div class="abs" style="left:110px;top:300px;width:900px">
+    <div class="t" style="font-size:84px;line-height:1.05">Tuez les adds,<br>tournez les fontaines,<br>lisez les infections.</div>
+    <div class="t c" style="font-size:84px;margin-top:20px">Et Vashnik tombe.</div>
+  </div>
+  <div class="abs" style="left:110px;bottom:90px;display:flex;gap:14px;align-items:center"><span class="t" style="font-size:40px">GIDEON</span><span class="m" style="font-size:14px;color:var(--muted)">COACH DE RAID</span></div>
+  ${tag(16, '11:58', 'CARTON DE FIN')}`)
+
+document.getElementById('root').innerHTML = F.map((h, i) => `<section class="frame" id="p${String(i + 1).padStart(2, '0')}">${h}</section>`).join('')
+window.__ready = true
+</script>
+</body>
+</html>

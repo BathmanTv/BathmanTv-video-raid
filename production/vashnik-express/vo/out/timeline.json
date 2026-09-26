@@ -1,0 +1,166 @@
+{
+ "duration": 174.688,
+ "lines": [
+  {
+   "i": 0,
+   "scene": "intro",
+   "text": "Vashnik le Malveillant, en {c:Mythique}. La strat express, en trois minutes.",
+   "start": 3.0,
+   "end": 7.624
+  },
+  {
+   "i": 1,
+   "scene": "hook",
+   "text": "Le combat a une seule phase. Il ne demande pas de faire de gros dégâts : il demande de {c:tenir une rotation}.",
+   "start": 9.024,
+   "end": 15.592
+  },
+  {
+   "i": 2,
+   "scene": "room",
+   "text": "La salle est découpée en trois tiers, et chaque tiers a sa fontaine : le {s:Sang}, l’{o:Ombre} et la {f:Flamme}.",
+   "start": 16.992,
+   "end": 22.849
+  },
+  {
+   "i": 3,
+   "scene": "room",
+   "text": "Au centre, la {d:Cavité malveillante}. C’est le point de défaite du combat.",
+   "start": 23.349,
+   "end": 27.761
+  },
+  {
+   "i": 4,
+   "scene": "imbibe",
+   "text": "Quand sa barre d’énergie est pleine, Vashnik lance {c:Absorption}, et il boit aux {c:deux fontaines les plus proches} de sa position.",
+   "start": 29.161,
+   "end": 36.502
+  },
+  {
+   "i": 5,
+   "scene": "rotation",
+   "text": "Donc ce sont {c:les tanks qui décident}. On tourne : une seule nouvelle fontaine par cycle.",
+   "start": 37.902,
+   "end": 43.207
+  },
+  {
+   "i": 6,
+   "scene": "venoms",
+   "text": "Chaque fontaine bue éjecte un venin vivant, qui rampe vers la Cavité.",
+   "start": 46.807,
+   "end": 50.725
+  },
+  {
+   "i": 7,
+   "scene": "venoms",
+   "text": "Un venin qui atteint le centre, c’est survivable. {d:Deux, c’est un wipe.}",
+   "start": 51.225,
+   "end": 55.512
+  },
+  {
+   "i": 8,
+   "scene": "venoms",
+   "text": "Après {c:soixante secondes}, un venin encore en vie devient insensible aux contrôles, et plus rapide. {d:Il n’y a pas de plus tard.}",
+   "start": 57.212,
+   "end": 65.249
+  },
+  {
+   "i": 9,
+   "scene": "blood",
+   "text": "Le {s:Sang} est insensible aux contrôles, et quand il meurt, {s:il se divise en caillots}. Tuez aussi les petits.",
+   "start": 67.649,
+   "end": 74.039
+  },
+  {
+   "i": 10,
+   "scene": "shadow",
+   "text": "L’{o:Ombre} arrive par paquets de cinq, sous un voile qui vaut toute sa vie : {o:on le tue deux fois}, là où l’on veut que les flaques tombent.",
+   "start": 75.439,
+   "end": 82.744
+  },
+  {
+   "i": 11,
+   "scene": "flame",
+   "text": "La {f:Flamme}, c’est la {d:priorité absolue}. Tant qu’il vit, il fait mal à tout le raid, et quand il meurt, il explose.",
+   "start": 84.144,
+   "end": 91.206
+  },
+  {
+   "i": 12,
+   "scene": "flame",
+   "text": "Il en arrive deux : on contrôle le premier, on tue le second. {d:Jamais les deux ensemble.}",
+   "start": 91.706,
+   "end": 96.998
+  },
+  {
+   "i": 13,
+   "scene": "infect",
+   "text": "Vashnik infecte les joueurs avec le venin des fontaines qu’il vient de boire. Trois infections, {c:trois réflexes opposés}.",
+   "start": 99.598,
+   "end": 106.893
+  },
+  {
+   "i": 14,
+   "scene": "infect",
+   "text": "{s:Sang} : on se rapproche. Il faut des corps dans le cercle.",
+   "start": 107.993,
+   "end": 111.356
+  },
+  {
+   "i": 15,
+   "scene": "infect",
+   "text": "{o:Ombre} : on s’écarte. Personne dans le cercle de {c:trois mètres cinquante}.",
+   "start": 111.856,
+   "end": 116.322
+  },
+  {
+   "i": 16,
+   "scene": "infect",
+   "text": "{f:Flamme} : on étale les dissipations, et {d:jamais sur un raid bas}.",
+   "start": 116.822,
+   "end": 120.551
+  },
+  {
+   "i": 17,
+   "scene": "fangs",
+   "text": "Trois réflexes de fond, quelles que soient les fontaines. Les tanks : {c:swap à chaque Crochet dégoulinant}.",
+   "start": 123.351,
+   "end": 129.137
+  },
+  {
+   "i": 18,
+   "scene": "froth",
+   "text": "{c:Écume pestilentielle} : les marqués s’écartent, et tout le monde se place {c:entre les axes} des vagues.",
+   "start": 130.537,
+   "end": 136.362
+  },
+  {
+   "i": 19,
+   "scene": "bile",
+   "text": "{c:Catalyseur malveillant} : chaque impact de bile doit être encaissé par au moins un joueur. On s’étale pour tout couvrir.",
+   "start": 137.762,
+   "end": 144.714
+  },
+  {
+   "i": 20,
+   "scene": "tumors",
+   "text": "En {c:Mythique}, des tumeurs apparaissent aussi. Si elles ne sont pas détruites, c’est {d:Malveillance, cumulable : un wipe à retardement}.",
+   "start": 146.914,
+   "end": 154.94
+  },
+  {
+   "i": 21,
+   "scene": "tumors",
+   "text": "Et ce sont {c:les vagues d’Écume qui les détruisent} : les marqués orientent leurs vagues vers les tumeurs.",
+   "start": 156.44,
+   "end": 162.007
+  },
+  {
+   "i": 22,
+   "scene": "outro",
+   "text": "Tuez les adds, tournez les fontaines, lisez les infections. {c:Et Vashnik tombe.}",
+   "start": 165.007,
+   "end": 169.688
+  }
+ ]
+}

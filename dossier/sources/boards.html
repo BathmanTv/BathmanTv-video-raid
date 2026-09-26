@@ -1,0 +1,342 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Guide Vashnik — planches</title>
+<style>
+@font-face { font-family: "Barlow Condensed"; src: url(../../production/vashnik-express/assets/fonts/barlow-condensed-700.woff2) format("woff2"); font-weight: 700; }
+@font-face { font-family: "Fira Sans"; src: url(../../production/vashnik-express/assets/fonts/fira-sans-400.woff2) format("woff2"); font-weight: 400; }
+@font-face { font-family: "Fira Sans"; src: url(../../production/vashnik-express/assets/fonts/fira-sans-500.woff2) format("woff2"); font-weight: 500; }
+@font-face { font-family: "JetBrains Mono"; src: url(../../production/vashnik-express/assets/fonts/jetbrains-mono.woff2) format("woff2"); font-weight: 100 800; }
+
+:root {
+  /* pris sur le personnage : armure, filets, gemmes, cape, marbre */
+  --night: #04050F; --panel: #0A0C22; --deep: #0B1233; --royal: #08218E; --armor: #1F3FA8;
+  --gold: #D19A45; --gold-hi: #FFE982; --cyan: #3FB8FF; --cyan-soft: #7ADBFA;
+  --violet: #4A1D7A; --violet-hi: #8B5CF6; --marble: #EDE9E1; --muted: #A9B4C7;
+  /* sémantique des mécaniques */
+  --danger: #FF4D5E; --safe: #3DDC97; --tank: #58A6FF; --heal: #3DDC97; --dps: #EDE9E1;
+  --title: "Barlow Condensed", sans-serif; --body: "Fira Sans", sans-serif; --mono: "JetBrains Mono", monospace;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { background: #222; font-family: var(--body); color: #fff; }
+.frame { position: relative; width: 1920px; height: 1080px; overflow: hidden; background: var(--night); margin-bottom: 40px; }
+.abs { position: absolute; }
+.t { font-family: var(--title); font-weight: 700; text-transform: uppercase; letter-spacing: .02em; line-height: .92; }
+.m { font-family: var(--mono); letter-spacing: .16em; text-transform: uppercase; }
+.gold { color: var(--gold); } .goldhi { color: var(--gold-hi); } .cyan { color: var(--cyan-soft); }
+
+/* studio : nuit → bleu roi, anneau arcanique, poussière dorée */
+.studio { position: absolute; inset: 0; background:
+  radial-gradient(ellipse 55% 70% at var(--hx, 32%) 42%, rgba(31,63,168,.55), transparent 70%),
+  radial-gradient(ellipse 80% 60% at 80% 110%, rgba(74,29,122,.45), transparent 70%),
+  linear-gradient(180deg, #060A24, var(--night)); }
+.dots { position: absolute; inset: 0; background-image: radial-gradient(rgba(122,219,250,.10) 1.2px, transparent 1.4px); background-size: 32px 32px; mask-image: radial-gradient(ellipse 70% 70% at 50% 50%, #000, transparent); }
+.vign { position: absolute; inset: 0; background: radial-gradient(ellipse 90% 90% at 50% 50%, transparent 55%, rgba(0,0,0,.55)); pointer-events: none; }
+.bokeh i { position: absolute; border-radius: 50%; filter: blur(6px); }
+.char { position: absolute; filter: drop-shadow(0 0 40px rgba(63,184,255,.22)) drop-shadow(0 30px 60px rgba(0,0,0,.6)); }
+.tag { position: absolute; right: 24px; bottom: 16px; font: 500 12px var(--mono); letter-spacing: .18em; color: rgba(255,255,255,.55); background: rgba(4,5,15,.75); padding: 5px 10px; border-radius: 3px; z-index: 20; }
+
+/* composants */
+.chapter { position: absolute; left: 80px; top: 64px; display: flex; align-items: center; gap: 16px; }
+.chapter .dia { width: 16px; height: 16px; transform: rotate(45deg); background: var(--cyan); box-shadow: 0 0 14px var(--cyan); }
+.chapter .a { font: 700 30px var(--title); letter-spacing: .06em; }
+.chapter .sep { width: 1px; height: 26px; background: rgba(209,154,69,.6); }
+.chapter .b { font: 500 16px var(--mono); letter-spacing: .2em; color: var(--muted); }
+.prog { display: flex; gap: 6px; margin-left: 10px; } .prog i { width: 26px; height: 4px; background: rgba(169,180,199,.25); } .prog i.on { background: var(--gold); }
+.badge { position: absolute; right: 80px; top: 60px; display: flex; gap: 10px; align-items: center; }
+.pill { font: 600 15px var(--mono); letter-spacing: .2em; padding: 9px 16px; border-radius: 3px; border: 1px solid rgba(209,154,69,.55); color: var(--gold); background: rgba(10,12,34,.7); }
+.pill.myth { color: #fff; border-color: var(--violet-hi); background: linear-gradient(135deg, var(--violet), #2A0F52); box-shadow: 0 0 22px rgba(139,92,246,.45); }
+
+.lower { position: absolute; left: 80px; bottom: 150px; display: flex; align-items: stretch; background: linear-gradient(90deg, rgba(10,12,34,.94), rgba(10,12,34,.75)); border-bottom: 2px solid var(--gold); box-shadow: 0 18px 40px rgba(0,0,0,.5); }
+.lower .bar { width: 8px; background: linear-gradient(var(--gold-hi), var(--gold)); }
+.lower .txt { padding: 16px 26px 16px 22px; }
+.lower .n { font: 700 56px var(--title); letter-spacing: .04em; line-height: 1; }
+.lower .r { font: 500 15px var(--mono); letter-spacing: .22em; color: var(--gold); margin-top: 6px; }
+.lower .wave { display: flex; align-items: center; gap: 4px; padding: 0 24px 0 6px; }
+.lower .wave i { width: 4px; border-radius: 2px; background: var(--cyan); box-shadow: 0 0 8px rgba(63,184,255,.6); }
+
+.caption { position: absolute; left: 0; right: 0; bottom: 64px; text-align: center; font: 500 40px var(--body); text-shadow: 0 2px 10px rgba(0,0,0,.9), 0 0 2px #000; }
+.caption b { font-weight: 500; color: var(--gold-hi); }
+
+.tv { position: absolute; border: 2px solid var(--gold); background: var(--panel); box-shadow: 0 30px 80px rgba(0,0,0,.6), 0 0 0 8px rgba(209,154,69,.08); }
+.tv .head { position: absolute; left: 0; right: 0; top: -44px; height: 44px; display: flex; align-items: center; gap: 12px; padding: 0 16px; background: linear-gradient(90deg, var(--gold), #9C6E2B); color: var(--night); font: 700 24px var(--title); letter-spacing: .08em; }
+.tv .head .live { width: 12px; height: 12px; border-radius: 50%; background: var(--danger); box-shadow: 0 0 10px var(--danger); }
+.tv .head .r { margin-left: auto; font: 600 14px var(--mono); letter-spacing: .18em; }
+.corner { position: absolute; width: 26px; height: 26px; border-color: var(--gold-hi); border-style: solid; }
+
+.ingame { position: absolute; inset: 0; background:
+  repeating-linear-gradient(135deg, rgba(255,255,255,.035) 0 2px, transparent 2px 22px),
+  radial-gradient(ellipse 70% 70% at 50% 45%, #2A3448, #121826 75%); }
+.ingame .lab { position: absolute; left: 0; right: 0; top: 46%; text-align: center; }
+.ingame .lab .a { font: 700 64px var(--title); letter-spacing: .1em; color: rgba(255,255,255,.22); }
+.ingame .lab .b { font: 500 18px var(--mono); letter-spacing: .14em; color: rgba(255,255,255,.3); margin-top: 10px; text-transform: none; }
+
+.chip { display: inline-flex; align-items: center; gap: 10px; padding: 9px 16px 9px 12px; border-radius: 999px; background: rgba(10,12,34,.85); border: 1px solid rgba(255,255,255,.18); font: 600 16px var(--mono); letter-spacing: .16em; }
+.chip svg { width: 22px; height: 22px; }
+.timer { font: 700 30px var(--mono); letter-spacing: .06em; padding: 10px 18px; border: 2px solid var(--danger); color: #fff; background: rgba(40,6,12,.8); border-radius: 4px; box-shadow: 0 0 24px rgba(255,77,94,.35); }
+
+.card { position: absolute; background: linear-gradient(160deg, rgba(20,28,74,.92), rgba(10,12,34,.92)); border: 1px solid rgba(209,154,69,.55); border-radius: 6px; }
+.dia-b { display: inline-block; width: 12px; height: 12px; transform: rotate(45deg); background: var(--gold); margin-right: 16px; vertical-align: middle; }
+</style>
+</head>
+<body>
+
+<!-- ─────────────── 00 · CHARTE ─────────────── -->
+<section class="frame" id="f0" style="background:var(--night)">
+  <div class="dots" style="opacity:.6"></div>
+  <div class="abs" style="left:80px;top:64px">
+    <div class="m gold" style="font-size:16px">GUIDE DE BOSS · CHARTE GRAPHIQUE</div>
+    <div class="t" style="font-size:96px;margin-top:10px">Vashnik <span class="gold">·</span> Mythique</div>
+    <div style="font:400 24px var(--body);color:var(--muted);margin-top:14px;max-width:1000px">Toutes les couleurs viennent du personnage : l’armure bleu roi, les filets d’or, les gemmes cyan, la cape violette et le marbre.</div>
+  </div>
+  <img class="abs" src="detourages/gideon-portrait-9x16.png" style="right:40px;top:40px;height:600px;filter:drop-shadow(0 0 40px rgba(63,184,255,.25));-webkit-mask-image:linear-gradient(90deg,transparent,#000 14%,#000 86%,transparent),linear-gradient(#000 78%,transparent);-webkit-mask-composite:source-in;mask-composite:intersect">
+  <!-- couleurs -->
+  <div class="abs m" style="left:80px;top:330px;font-size:15px;color:var(--muted)">COULEURS</div>
+  <div class="abs" id="sw" style="left:80px;top:362px;display:flex;gap:14px;flex-wrap:wrap;width:1180px"></div>
+  <!-- typo -->
+  <div class="abs m" style="left:80px;top:606px;font-size:15px;color:var(--muted)">TYPOGRAPHIE</div>
+  <div class="abs" style="left:80px;top:640px;display:flex;gap:56px;align-items:flex-end">
+    <div><div class="t" style="font-size:72px">Phase 2</div><div class="m" style="font-size:13px;color:var(--muted);margin-top:8px">BARLOW CONDENSED 700 · TITRES</div></div>
+    <div><div style="font:500 34px var(--body)">Le sous-titre suit la <span class="goldhi">voix</span>.</div><div class="m" style="font-size:13px;color:var(--muted);margin-top:8px">FIRA SANS 400/500 · TEXTE, SOUS-TITRES</div></div>
+    <div><div style="font:700 34px var(--mono);letter-spacing:.06em">00:42</div><div class="m" style="font-size:13px;color:var(--muted);margin-top:8px">JETBRAINS MONO · CHRONOS, TAGS</div></div>
+  </div>
+  <!-- composants -->
+  <div class="abs m" style="left:80px;top:790px;font-size:15px;color:var(--muted)">COMPOSANTS</div>
+  <div class="abs" style="left:80px;top:826px;display:flex;gap:18px;align-items:center;flex-wrap:wrap;width:1760px" id="comp"></div>
+  <!-- motion -->
+  <div class="card" style="left:1300px;top:660px;width:540px;height:340px;padding:26px 30px">
+    <div class="m gold" style="font-size:15px;margin-bottom:14px">ANIMATION</div>
+    <div id="motion" style="font:400 19px/1.5 var(--body);color:#E3E8F2"></div>
+  </div>
+  <div class="tag">PLANCHE 00 · CHARTE</div>
+</section>
+
+<!-- ─────────────── 01 · OUVERTURE ─────────────── -->
+<section class="frame" id="f1">
+  <div class="studio" style="--hx:68%"></div><div class="dots"></div>
+  <svg class="abs ring" style="left:1040px;top:-40px" width="760" height="760" data-ring="1"></svg>
+  <img class="char" src="../../production/vashnik-express/assets/img/gideon.png" style="left:520px;top:150px;width:1672px">
+  <div class="abs" style="left:0;top:0;width:1100px;height:1080px;background:linear-gradient(90deg,var(--night) 30%,transparent)"></div>
+  <div class="abs" style="left:110px;top:300px">
+    <div class="m gold" style="font-size:20px">GUIDE DE BOSS</div>
+    <div class="t" style="font-size:250px;margin-top:10px;color:var(--gold);text-shadow:0 0 60px rgba(209,154,69,.35);letter-spacing:.03em">Vashnik</div>
+    <div style="display:flex;gap:12px;margin-top:26px"><span class="pill myth">MYTHIQUE</span><span class="pill">GUIDE COMPLET</span></div>
+    <div style="font:400 30px var(--body);color:#E3E8F2;margin-top:34px;max-width:720px">Accroche du script, une phrase.</div>
+  </div>
+  <div class="abs" style="left:110px;bottom:90px;display:flex;gap:34px" id="toc"></div>
+  <div class="vign"></div>
+  <div class="tag">PLANCHE 01 · OUVERTURE · TEXTES PROVISOIRES</div>
+</section>
+
+<!-- ─────────────── 02 · PLAN CAMÉRA + ENCART ─────────────── -->
+<section class="frame" id="f2">
+  <div class="studio" style="--hx:26%"></div><div class="dots"></div>
+  <svg class="abs ring" style="left:170px;top:150px" width="600" height="600" data-ring="1"></svg>
+  <img class="char" src="../../production/vashnik-express/assets/img/gideon.png" style="left:-290px;top:250px;width:1520px">
+  <div class="chapter"><div class="dia"></div><div class="a">Phase 1</div><div class="sep"></div><div class="b">MÉCANIQUE 01</div><div class="prog"><i class="on"></i><i class="on"></i><i></i><i></i><i></i></div></div>
+  <div class="badge"><span class="pill">VASHNIK</span><span class="pill myth">MYTHIQUE</span></div>
+  <div class="tv" style="left:1000px;top:210px;width:840px;height:472px">
+    <div class="head"><span class="live"></span>Mécanique 01<span class="r">SCHÉMA</span></div>
+    <svg class="arena" data-scale=".78" style="position:absolute;left:0;top:0" width="840" height="472"></svg>
+  </div>
+  <div class="abs" style="left:1000px;top:706px;width:840px;display:flex;gap:12px" id="fields"></div>
+  <div class="lower"><div class="bar"></div><div class="txt"><div class="n">GIDEON</div><div class="r">COACH DE RAID</div></div><div class="wave" data-wave="18"></div></div>
+  <div class="abs" style="left:0;right:0;bottom:0;height:220px;background:linear-gradient(transparent,rgba(4,5,15,.78))"></div>
+  <div class="caption">Le sous-titre suit la voix, le <b>mot-clé</b> ressort en or.</div>
+  <div class="vign"></div>
+  <div class="tag">PLANCHE 02 · PLAN CAMÉRA + ENCART TÉLÉ · TEXTES PROVISOIRES</div>
+</section>
+
+<!-- ─────────────── 03 · PLAN IN-GAME + VIGNETTE ─────────────── -->
+<section class="frame" id="f3">
+  <div class="ingame"><div class="lab"><div class="a">CAPTURE IN-GAME</div><div class="b">E:\Projets\Vidéo Raid\Vashni</div></div></div>
+  <svg class="abs" width="1920" height="1080" style="left:0;top:0">
+    <defs><marker id="ah" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" fill="#FFE982"/></marker></defs>
+    <circle cx="1180" cy="430" r="150" fill="rgba(255,77,94,.14)" stroke="#FF4D5E" stroke-width="4" stroke-dasharray="18 12"/>
+    <circle cx="1180" cy="430" r="176" fill="none" stroke="rgba(255,77,94,.35)" stroke-width="2"/>
+    <path d="M760 250 C 900 250, 980 300, 1040 360" fill="none" stroke="#FFE982" stroke-width="4" marker-end="url(#ah)"/>
+    <circle cx="560" cy="700" r="90" fill="rgba(61,220,151,.14)" stroke="#3DDC97" stroke-width="4"/>
+    <path d="M1060 560 C 900 660, 760 700, 670 700" fill="none" stroke="#7ADBFA" stroke-width="4" stroke-dasharray="14 10" marker-end="url(#ah)"/>
+  </svg>
+  <div class="abs" style="left:430px;top:200px;background:rgba(10,12,34,.9);border-left:4px solid var(--gold);padding:12px 20px">
+    <div class="t" style="font-size:40px">Nom de la mécanique</div><div class="m" style="font-size:14px;color:var(--gold);margin-top:6px">LÉGENDE COURTE</div>
+  </div>
+  <div class="abs" style="left:470px;top:810px"><span class="chip" style="border-color:var(--safe);color:var(--safe)">ZONE SÛRE</span></div>
+  <div class="chapter"><div class="dia"></div><div class="a">Phase 1</div><div class="sep"></div><div class="b">MÉCANIQUE 01</div><div class="prog"><i class="on"></i><i class="on"></i><i></i><i></i><i></i></div></div>
+  <div class="badge"><span class="timer">00:42</span></div>
+  <div class="abs" style="left:80px;top:130px;display:flex;flex-direction:column;gap:10px" data-roles="1"></div>
+  <!-- vignette présentateur -->
+  <div class="abs" style="right:80px;bottom:150px;width:360px;height:360px;border:2px solid var(--gold);background:radial-gradient(ellipse at 50% 40%,#1F3FA8,#060A24 75%);overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,.6),0 0 30px rgba(63,184,255,.2)">
+    <img src="../../production/vashnik-express/assets/img/gideon.png" style="position:absolute;left:-270px;top:8px;width:900px">
+    <div class="abs" style="left:0;right:0;bottom:0;height:44px;background:rgba(10,12,34,.9);display:flex;align-items:center;gap:10px;padding:0 14px"><span class="t" style="font-size:24px">GIDEON</span><div class="wave" data-wave="10" style="display:flex;gap:3px;align-items:center;margin-left:auto"></div></div>
+  </div>
+  <div class="abs" style="left:0;right:0;bottom:0;height:220px;background:linear-gradient(transparent,rgba(4,5,15,.78))"></div>
+  <div class="caption">Sous-titre de la voix off pendant le plan in-game.</div>
+  <div class="tag">PLANCHE 03 · PLAN IN-GAME + VIGNETTE · TEXTES PROVISOIRES</div>
+</section>
+
+<!-- ─────────────── 04 · SCHÉMA TACTIQUE ─────────────── -->
+<section class="frame" id="f4">
+  <div class="studio" style="--hx:40%"></div><div class="dots"></div>
+  <div class="chapter"><div class="dia"></div><div class="a">Phase 1</div><div class="sep"></div><div class="b">POSITIONNEMENT</div><div class="prog"><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i></div></div>
+  <div class="badge"><span class="pill">VASHNIK</span><span class="pill myth">MYTHIQUE</span></div>
+  <svg class="arena" data-scale="1.25" data-steps="1" style="position:absolute;left:120px;top:150px" width="960" height="760"></svg>
+  <div class="card" style="left:1160px;top:170px;width:680px;height:700px;padding:34px 38px">
+    <div class="m gold" style="font-size:15px">QUI FAIT QUOI</div>
+    <div id="roles4"></div>
+  </div>
+  <div class="abs" style="left:120px;right:80px;bottom:70px" id="tl"></div>
+  <div class="tag">PLANCHE 04 · SCHÉMA TACTIQUE · TEXTES PROVISOIRES</div>
+</section>
+
+<!-- ─────────────── 05 · CARTON DE CHAPITRE ─────────────── -->
+<section class="frame" id="f5">
+  <div class="studio" style="--hx:50%"></div><div class="dots"></div>
+  <svg class="abs ring" style="left:510px;top:90px" width="900" height="900" data-ring="1"></svg>
+  <div class="abs" style="left:945px;top:250px;width:30px;height:30px;transform:rotate(45deg);background:var(--cyan);box-shadow:0 0 40px var(--cyan),0 0 90px rgba(63,184,255,.6)"></div>
+  <div class="abs" style="left:0;right:0;top:330px;text-align:center">
+    <div class="m gold" style="font-size:20px">CHAPITRE 03 / 05</div>
+    <div class="t" style="font-size:260px;margin-top:10px;text-shadow:0 0 60px rgba(63,184,255,.35)">Phase 2</div>
+    <div style="font:400 34px var(--body);color:#E3E8F2;margin-top:18px">Titre du chapitre</div>
+  </div>
+  <div class="vign"></div>
+  <div class="tag">PLANCHE 05 · CARTON DE CHAPITRE · TEXTES PROVISOIRES</div>
+</section>
+
+<!-- ─────────────── 06 · À RETENIR ─────────────── -->
+<section class="frame" id="f6">
+  <div class="studio" style="--hx:78%"></div><div class="dots"></div>
+  <svg class="abs ring" style="left:1220px;top:110px" width="600" height="600" data-ring="1"></svg>
+  <img class="char" src="../../production/vashnik-express/assets/img/gideon.png" style="left:768px;top:250px;width:1505px">
+  <div class="abs" style="left:80px;top:90px">
+    <div class="m gold" style="font-size:18px">VASHNIK · MYTHIQUE</div>
+    <div class="t" style="font-size:150px;margin-top:8px">À retenir</div>
+  </div>
+  <div class="abs" style="left:80px;top:360px;display:flex;flex-direction:column;gap:22px" id="recap"></div>
+  <div class="caption" style="right:900px">Conclusion du script en sous-titre.</div>
+  <div class="vign"></div>
+  <div class="tag">PLANCHE 06 · À RETENIR · TEXTES PROVISOIRES</div>
+</section>
+
+<script>
+const NS = 'http://www.w3.org/2000/svg'
+const S = (tag, attrs, parent) => { const e = document.createElementNS(NS, tag); for (const k in attrs) e.setAttribute(k, attrs[k]); parent && parent.appendChild(e); return e }
+const ICON = {
+  tank: 'M12 2l8 3v6c0 5-3.4 9.3-8 11-4.6-1.7-8-6-8-11V5z',
+  heal: 'M9 3h6v6h6v6h-6v6H9v-6H3V9h6z',
+  dps: 'M14.5 3L21 3l0 6.5-9.2 9.2 1.9 1.9-1.4 1.4-2.3-2.3-3.4 3.4-2.1-2.1 3.4-3.4-2.3-2.3 1.4-1.4 1.9 1.9z',
+}
+const COL = { tank: '#58A6FF', heal: '#3DDC97', dps: '#EDE9E1' }
+const icon = (k, c = COL[k]) => `<svg viewBox="0 0 24 24"><path d="${ICON[k]}" fill="${c}"/></svg>`
+const chip = (k, label) => `<span class="chip" style="color:${COL[k]};border-color:${COL[k]}55">${icon(k)}${label}</span>`
+
+// anneau arcanique (repris du cercle gravé sur le casque)
+document.querySelectorAll('[data-ring]').forEach(svg => {
+  const w = +svg.getAttribute('width'), c = w / 2
+  const g = S('g', { fill: 'none' }, svg)
+  ;[0.48, 0.40, 0.30].forEach((r, i) => S('circle', { cx: c, cy: c, r: w * r, stroke: i ? 'rgba(122,219,250,.18)' : 'rgba(209,154,69,.45)', 'stroke-width': i ? 1.5 : 2, 'stroke-dasharray': i === 1 ? '4 10' : 'none' }, g))
+  for (let k = 0; k < 24; k++) {
+    const a = k / 24 * Math.PI * 2, r0 = w * 0.30, r1 = w * (k % 2 ? 0.37 : 0.40)
+    S('line', { x1: c + Math.cos(a) * r0, y1: c + Math.sin(a) * r0, x2: c + Math.cos(a) * r1, y2: c + Math.sin(a) * r1, stroke: 'rgba(122,219,250,.22)', 'stroke-width': 1.5 }, g)
+  }
+  for (let k = 0; k < 4; k++) {
+    const a = k / 4 * Math.PI * 2 - Math.PI / 2, x = c + Math.cos(a) * w * 0.48, y = c + Math.sin(a) * w * 0.48
+    S('rect', { x: x - 7, y: y - 7, width: 14, height: 14, fill: '#D19A45', transform: `rotate(45 ${x} ${y})` }, g)
+  }
+})
+
+// onde de voix : les yeux et les gemmes suivent l'amplitude
+document.querySelectorAll('[data-wave]').forEach(el => {
+  const n = +el.dataset.wave
+  for (let i = 0; i < n; i++) { const h = 8 + Math.abs(Math.sin(i * 1.7) * Math.cos(i * 0.6)) * 34; const b = document.createElement('i'); b.style.cssText = `display:block;width:4px;border-radius:2px;background:#3FB8FF;box-shadow:0 0 8px rgba(63,184,255,.6);height:${h}px`; el.appendChild(b) }
+})
+
+// schéma d'arène générique (exemple de composant, pas les vraies mécaniques)
+document.querySelectorAll('svg.arena').forEach(svg => {
+  const W = +svg.getAttribute('width'), H = +svg.getAttribute('height'), sc = +svg.dataset.scale
+  const cx = W / 2, cy = H / 2, R = 270 * sc
+  const defs = S('defs', {}, svg)
+  const m = S('marker', { id: 'a' + W, viewBox: '0 0 10 10', refX: 7, refY: 5, markerWidth: 6, markerHeight: 6, orient: 'auto' }, defs); S('path', { d: 'M0 0L10 5L0 10z', fill: '#7ADBFA' }, m)
+  const cp = S('clipPath', { id: 'c' + W }, defs); S('circle', { cx, cy, r: R }, cp)
+  S('circle', { cx, cy, r: R, fill: '#0B1233', stroke: '#D19A45', 'stroke-width': 3 }, svg)
+  const grid = S('g', { 'clip-path': `url(#c${W})`, stroke: 'rgba(122,219,250,.08)', 'stroke-width': 1 }, svg)
+  for (let x = cx - R; x <= cx + R; x += 30 * sc) S('line', { x1: x, y1: cy - R, x2: x, y2: cy + R }, grid)
+  for (let y = cy - R; y <= cy + R; y += 30 * sc) S('line', { x1: cx - R, y1: y, x2: cx + R, y2: y }, grid)
+  ;[0.66, 0.33].forEach(f => S('circle', { cx, cy, r: R * f, fill: 'none', stroke: 'rgba(122,219,250,.16)', 'stroke-width': 1.5, 'stroke-dasharray': '6 8' }, svg))
+  // zone dangereuse / zone sûre
+  const dx = cx + 110 * sc, dy = cy - 90 * sc
+  S('circle', { cx: dx, cy: dy, r: 86 * sc, fill: 'rgba(255,77,94,.2)', stroke: '#FF4D5E', 'stroke-width': 3, 'stroke-dasharray': '12 8' }, svg)
+  const sx = cx - 150 * sc, sy = cy + 120 * sc
+  S('circle', { cx: sx, cy: sy, r: 70 * sc, fill: 'rgba(61,220,151,.16)', stroke: '#3DDC97', 'stroke-width': 3 }, svg)
+  // raid
+  const P = []
+  P.push(['tank', cx - 58 * sc, cy + 6 * sc], ['tank', cx + 58 * sc, cy + 6 * sc])
+  ;[[-150, -70], [-120, -118], [-178, -20], [-80, -150]].forEach(([x, y]) => P.push(['heal', cx + x * sc, cy + y * sc]))
+  for (let i = 0; i < 14; i++) { const a = -0.3 + i / 13 * 2.6, r = (125 + (i % 3) * 22) * sc; P.push(['dps', cx + Math.cos(a) * r, cy + Math.sin(a) * r]) }
+  P.forEach(([k, x, y]) => { S('circle', { cx: x, cy: y, r: 9 * sc, fill: COL[k], stroke: '#04050F', 'stroke-width': 2 }, svg) })
+  // boss
+  const b = 30 * sc
+  S('polygon', { points: `${cx},${cy - b} ${cx + b},${cy} ${cx},${cy + b} ${cx - b},${cy}`, fill: '#D19A45', stroke: '#FFE982', 'stroke-width': 2 }, svg)
+  const t = S('text', { x: cx, y: cy - b - 12, 'text-anchor': 'middle', fill: '#FFE982', 'font-family': 'Barlow Condensed', 'font-weight': 700, 'font-size': 26 * sc, 'letter-spacing': 2 }, svg); t.textContent = 'BOSS'
+  // déplacement
+  S('path', { d: `M${dx - 30 * sc} ${dy + 70 * sc} Q ${cx + 30 * sc} ${cy + 120 * sc} ${sx + 70 * sc} ${sy - 10 * sc}`, fill: 'none', stroke: '#7ADBFA', 'stroke-width': 3.5, 'stroke-dasharray': '12 8', 'marker-end': `url(#a${W})` }, svg)
+  if (svg.dataset.steps) [[dx + 95 * sc, dy - 70 * sc, 1], [cx - 10 * sc, cy + 88 * sc, 2], [sx - 90 * sc, sy + 40 * sc, 3]].forEach(([x, y, n]) => {
+    S('circle', { cx: x, cy: y, r: 22, fill: '#04050F', stroke: '#FFE982', 'stroke-width': 2.5 }, svg)
+    const s = S('text', { x, y: y + 9, 'text-anchor': 'middle', fill: '#FFE982', 'font-family': 'Barlow Condensed', 'font-weight': 700, 'font-size': 26 }, svg); s.textContent = n
+  })
+})
+
+// planche 00
+const SW = [['NUIT', '#04050F'], ['PANNEAU', '#0A0C22'], ['BLEU ROI', '#08218E'], ['ARMURE', '#1F3FA8'], ['OR', '#D19A45'], ['OR CLAIR', '#FFE982'], ['GEMME', '#3FB8FF'], ['CAPE', '#4A1D7A'], ['MARBRE', '#EDE9E1'], ['DANGER', '#FF4D5E'], ['SÛR', '#3DDC97'], ['TANK', '#58A6FF']]
+document.getElementById('sw').innerHTML = SW.map(([n, c]) => `<div style="width:84px"><div style="height:84px;border-radius:6px;background:${c};border:1px solid rgba(255,255,255,.15)"></div><div class="m" style="font-size:12px;margin-top:8px;color:#fff;letter-spacing:.12em">${n}</div><div class="m" style="font-size:11px;color:var(--muted);letter-spacing:.08em">${c}</div></div>`).join('')
+document.getElementById('comp').innerHTML = `
+  <div class="lower" style="position:relative;left:0;bottom:0;transform:scale(.8);transform-origin:0 50%;margin-right:-60px"><div class="bar"></div><div class="txt"><div class="n">GIDEON</div><div class="r">COACH DE RAID</div></div><div class="wave" data-w2="1"></div></div>
+  <span class="pill myth">MYTHIQUE</span><span class="timer">00:42</span>
+  ${chip('tank', 'TANK')}${chip('heal', 'SOIN')}${chip('dps', 'DPS')}
+  <span class="chip" style="border-color:var(--danger);color:var(--danger)">ZONE DANGER</span>`
+const w2 = document.querySelector('[data-w2]'); for (let i = 0; i < 14; i++) { const b = document.createElement('i'); b.style.height = 8 + Math.abs(Math.sin(i * 1.7) * Math.cos(i * 0.6)) * 34 + 'px'; w2.appendChild(b) }
+document.getElementById('motion').innerHTML = [
+  'Casque sans bouche : pas de synchro labiale. Les yeux et les gemmes <b class="cyan">s’illuminent avec la voix</b>.',
+  'Respiration lente, léger balancement, cape qui ondule.',
+  'Transitions : l’anneau du casque tourne et s’ouvre.',
+  'L’encart télé glisse depuis la droite, cadre or.',
+  'Les repères des mécaniques se tracent à l’écran, calés sur la voix.',
+].map(s => `<div style="margin-bottom:8px"><span class="dia-b" style="width:9px;height:9px;margin-right:12px"></span>${s}</div>`).join('')
+
+// planche 01
+document.getElementById('toc').innerHTML = ['Présentation', 'Phase 1', 'Phase 2', 'À retenir'].map((s, i) => `<div style="display:flex;align-items:baseline;gap:12px"><span class="m gold" style="font-size:16px">0${i + 1}</span><span class="t" style="font-size:30px;color:${i ? 'var(--muted)' : '#fff'}">${s}</span></div>`).join('')
+// planche 03
+document.querySelector('[data-roles]').innerHTML = chip('tank', 'TANK') + chip('heal', 'SOIN') + chip('dps', 'DPS')
+// planche 04
+document.getElementById('roles4').innerHTML = [['tank', 'TANK'], ['heal', 'SOIN'], ['dps', 'DPS']].map(([k, n]) => `
+  <div style="margin-top:34px;padding-top:26px;border-top:1px solid rgba(209,154,69,.25);display:flex;gap:22px">
+    <div style="width:54px;height:54px;flex:none;border-radius:50%;border:2px solid ${COL[k]};display:flex;align-items:center;justify-content:center">${icon(k).replace('<svg', '<svg width="28" height="28"')}</div>
+    <div><div class="t" style="font-size:40px;color:${COL[k]}">${n}</div><div style="font:400 23px/1.45 var(--body);color:#E3E8F2;margin-top:6px">Consigne du script pour ce rôle.</div></div>
+  </div>`).join('') + `
+  <div style="margin-top:34px;padding:22px 24px;border:1px solid rgba(255,77,94,.55);background:rgba(255,77,94,.08);border-radius:4px">
+    <div class="m" style="font-size:15px;color:var(--danger)">⚠ PIÈGE À ÉVITER</div>
+    <div style="font:400 23px/1.45 var(--body);color:#E3E8F2;margin-top:8px">L’erreur qui fait wipe, d’après le script.</div>
+  </div>`
+document.getElementById('tl').innerHTML = `
+  <div style="display:flex;height:40px;border:1px solid rgba(209,154,69,.5)">
+    <div style="flex:40;background:linear-gradient(90deg,#08218E,#1F3FA8);display:flex;align-items:center;padding-left:16px" class="t"><span style="font-size:22px">Phase 1</span></div>
+    <div style="flex:14;background:linear-gradient(90deg,#4A1D7A,#6B2FB3);display:flex;align-items:center;padding-left:16px" class="t"><span style="font-size:22px">Intermission</span></div>
+    <div style="flex:46;background:linear-gradient(90deg,#08218E,#1F3FA8);display:flex;align-items:center;padding-left:16px" class="t"><span style="font-size:22px">Phase 2</span></div>
+  </div>
+  <div style="position:absolute;left:31%;top:-12px;bottom:-12px;width:3px;background:#3FB8FF;box-shadow:0 0 12px #3FB8FF"></div>` +
+  [8, 19, 31, 47, 63, 72, 86].map(p => `<div style="position:absolute;left:calc(${p}% - 7px);top:-24px;width:14px;height:14px;transform:rotate(45deg);background:#D19A45"></div>`).join('')
+// planche 06
+document.getElementById('recap').innerHTML = [1, 2, 3].map(i => `
+  <div style="display:flex;align-items:center;gap:26px;width:880px;padding:26px 30px;background:linear-gradient(90deg,rgba(20,28,74,.9),rgba(10,12,34,.6));border-left:4px solid var(--gold)">
+    <span class="t gold" style="font-size:64px;width:60px">${i}</span>
+    <span style="font:500 34px var(--body)">Point clé n°${i} du script, une phrase courte.</span>
+  </div>`).join('')
+document.getElementById('fields').innerHTML = [['QUI', 'Rôle ciblé'], ['QUAND', 'Moment du combat'], ['QUOI FAIRE', 'Réponse attendue']].map(([k, v]) => `
+  <div style="flex:1;padding:14px 18px;background:rgba(10,12,34,.88);border-top:2px solid var(--gold)">
+    <div class="m" style="font-size:13px;color:var(--gold)">${k}</div><div style="font:500 24px var(--body);margin-top:4px">${v}</div>
+  </div>`).join('')
+window.__ready = true
+</script>
+</body>
+</html>
