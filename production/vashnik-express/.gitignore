@@ -1,0 +1,9 @@
+out/*
+!out/delivery/
+out/delivery/*
+!out/delivery/vashnik-express-master.mp4
+!out/delivery/vashnik-express-contact-sheet.png
+!out/delivery/vashnik-express-delivery-report.json
+vo/out/voice.wav
+vo/models/
+__pycache__/
