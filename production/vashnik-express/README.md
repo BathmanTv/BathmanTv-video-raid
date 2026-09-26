@@ -52,7 +52,8 @@ pip install kokoro-onnx numpy scipy          # + ffmpeg, et playwright (npm i -g
 python3 vo/build_vo.py      # voix, table des temps, enveloppe → vo/out/
 python3 mix.py              # voix + fond + bruitages → out/final.wav
 node render.mjs             # → out/vashnik-express.mp4 (≈ 8 min)
-bash finalize_delivery.sh out/vashnik-express.mp4 out/delivery vashnik-express   # skill lanshu
+# finalize_delivery.sh : scripts/ de github.com/cclank/lanshu-create-ai-presenter-video
+bash …/lanshu-create-ai-presenter-video/scripts/finalize_delivery.sh out/vashnik-express.mp4 out/delivery vashnik-express
 node render.mjs --stills 30,90,150   # images fixes → out/stills/
 ```
 
