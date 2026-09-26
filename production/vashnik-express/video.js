@@ -167,9 +167,16 @@ function Room(parent) {
   const cavLabel = sv('text', { y: 29, 'text-anchor': 'middle', 'font-family': 'JetBrains Mono', 'font-weight': 600, 'font-size': 4.2, 'letter-spacing': 0.8, fill: '#D19A45', opacity: 0 }, svg)
   cavLabel.textContent = 'CAVITÉ MALVEILLANTE'
   const gT = sv('g', {}, svg), gM = sv('g', {}, svg), gR = sv('g', {}, svg), gV = sv('g', {}, svg)
-  const bossW = 46 * 1058 / 1090
-  const shadow = sv('ellipse', { rx: 12, ry: 3.5, fill: '#000', opacity: 0 }, svg)
-  const boss = sv('image', { href: 'assets/img/vashnik.png', width: bossW, height: 46, opacity: 0 }, svg)
+  // Vashnik : médaillon rond sur la tête, cerclé d'or (le danger), son nom dessous
+  const clipB = sv('clipPath', { id: `bc${id}` }, defs)
+  sv('circle', { r: 16 }, clipB)
+  const boss = sv('g', { opacity: 0 }, svg)
+  const halo = sv('circle', { r: 21, fill: '#D19A45', opacity: 0.22 }, boss)
+  sv('circle', { r: 16, fill: '#0A0C22' }, boss)
+  sv('image', { href: 'assets/img/vashnik-token.png', x: -16, y: -16, width: 32, height: 32, 'clip-path': `url(#bc${id})` }, boss)
+  sv('circle', { r: 16, fill: 'none', stroke: '#D19A45', 'stroke-width': 1.6 }, boss)
+  const bossLab = sv('text', { y: 25, 'text-anchor': 'middle', 'font-family': 'Barlow Condensed', 'font-weight': 700, 'font-size': 6.5, 'letter-spacing': 0.8, fill: '#D19A45' }, boss)
+  bossLab.textContent = 'VASHNIK'
   const venins = Array.from({ length: 4 }, () => {
     const g = sv('g', { opacity: 0 }, gV)
     const ring = sv('circle', { r: 10.5, fill: 'none', stroke: '#D19A45', 'stroke-width': 1.4, opacity: 0 }, g)
@@ -197,10 +204,10 @@ function Room(parent) {
     wrap, sect, glow, core, label, drain, cavPulse, cavFlash, cavLabel, tumors, marked, raid,
     place(cx, cy, r) { const s = r * 2.6; wrap.style.cssText = `left:${cx - s / 2}px;top:${cy - s / 2}px;width:${s}px;height:${s}px` },
     fountain: f => polar(74, ANG[f]),
-    setBoss(x, y, op) { SA(boss, 'x', x - bossW / 2); SA(boss, 'y', y - 36); SA(boss, 'opacity', op); SA(shadow, 'cx', x); SA(shadow, 'cy', y + 9); SA(shadow, 'opacity', op * 0.45) },
+    setBoss(x, y, op, t = 0) { SA(boss, 'transform', `translate(${x} ${y})`); SA(boss, 'opacity', op); SA(halo, 'r', 20 + 2 * Math.sin(t * 4)) },
     setDrain(f, bx, by, op, t) {
       const [x, y] = polar(74, ANG[f])
-      SA(drain[f], 'd', `M${x} ${y}Q${(x + bx) / 2 + (-by) * 0.15} ${(y + by) / 2} ${bx} ${by - 6}`)
+      SA(drain[f], 'd', `M${x} ${y}Q${(x + bx) / 2 + (-by) * 0.15} ${(y + by) / 2} ${bx} ${by}`)
       SA(drain[f], 'opacity', op); SA(drain[f], 'stroke-dashoffset', -t * 12)
     },
     setVenin(k, o) {
@@ -288,6 +295,10 @@ scene('map', B.map, B.det, root => {
      <div style="margin-top:12px;height:22px;border:1px solid rgba(122,219,250,.6);padding:3px"><div class="bar" style="height:100%;width:0;background:linear-gradient(90deg,#1F3FA8,#7ADBFA)"></div></div>
      <div style="display:flex;justify-content:space-between;margin-top:10px;font:600 20px var(--mono)"><span class="pct c">0 %</span><span class="abs2 c">Absorption <span class="en">(Imbibe)</span></span></div>
      <div class="rule" style="font:500 32px/1.35 var(--body);margin-top:26px">Il boit aux <span class="c">deux fontaines les plus proches</span> de sa position.</div>` }, root)
+  const bossCard = h('div', { cls: 'panel', css: `left:${RX}px;top:470px;width:${RW}px;height:370px;overflow:hidden`, html:
+    `<img src="assets/img/vashnik.png" style="position:absolute;left:-10px;top:-30px;width:700px">
+     <div style="position:absolute;inset:0;background:linear-gradient(180deg,transparent 45%,rgba(4,5,15,.92))"></div>
+     <div style="position:absolute;left:30px;bottom:24px"><div class="m d" style="font-size:14px">LE BOSS</div><div class="t" style="font-size:52px;margin-top:6px">Vashnik le Malveillant</div></div>` }, root)
   const eBar = energy.querySelector('.bar'), ePct = energy.querySelector('.pct'), eAbs = energy.querySelector('.abs2'), eRule = energy.querySelector('.rule')
   const rot = h('div', { cls: 'panel', css: `left:${RX}px;top:190px;width:${RW}px;padding:28px 32px`, html:
     `<div class="m" style="font-size:14px;color:var(--muted)">ROTATION PAR DÉFAUT</div>
@@ -308,9 +319,9 @@ scene('map', B.map, B.det, root => {
   const drinks = [[tDrink1, 'SO'], [tMove1 + 1.0, 'OF'], [tMove2 + 1.0, 'FS']]
   function bossPose(t) {
     if (t < tIn) return null
-    if (t < tMove1) { const p = tw(t, tIn, 1.4, E.io); return [PAIR.SO, lerp(140, 50, p)] }
-    if (t < tMove2) return [lerp(PAIR.SO, PAIR.OF, tw(t, tMove1, 1.0, E.io)), 50]
-    return [lerp(PAIR.OF, PAIR.FS, tw(t, tMove2, 1.0, E.io)), 50]
+    if (t < tMove1) { const p = tw(t, tIn, 1.4, E.io); return [PAIR.SO, lerp(112, 56, p)] }
+    if (t < tMove2) return [lerp(PAIR.SO, PAIR.OF, tw(t, tMove1, 1.0, E.io)), 56]
+    return [lerp(PAIR.OF, PAIR.FS, tw(t, tMove2, 1.0, E.io)), 56]
   }
   const arr1 = at(7, 'atteint') + 0.5, arr2 = at(7, 'Deux') + 0.3
   const v3a = st(8) + 0.2, v3h = at(8, 'insensible')
@@ -342,7 +353,7 @@ scene('map', B.map, B.det, root => {
       // le boss boit
       if (pose) {
         const [bx, by] = polar(pose[1], pose[0])
-        R.setBoss(bx, by, tw(t, tIn, 0.4))
+        R.setBoss(bx, by, tw(t, tIn, 0.4), t)
         for (const f of 'SOF') {
           const d = drinks.filter(([td, p]) => t >= td && p.includes(f)).pop()
           const op = d ? tw(t, d[0], 0.3) * (1 - tw(t, d[0] + 2.2, 0.5)) : 0
@@ -353,6 +364,7 @@ scene('map', B.map, B.det, root => {
       const pL = win(t, st(3) - 0.2, st(4) - 0.3), pE = win(t, st(4) - 0.3, st(5) - 0.4), pR = win(t, st(5) - 0.4, st(6) - 0.5), pV = tw(t, st(6) - 0.5, 0.4)
       O(legend, pL); T(legend, `translateX(${(1 - pL) * 40}px)`); O(legCav, tw(t, at(3, 'Cavité'), 0.4))
       O(energy, pE); T(energy, `translateX(${(1 - pE) * 40}px)`)
+      const pB = win(t, tIn, st(5) - 0.4); O(bossCard, pB); T(bossCard, `translateX(${(1 - pB) * 40}px)`)
       const fill = tw(t, st(4), 2.0, E.io)
       eBar.style.width = fill * 100 + '%'; ePct.textContent = Math.round(fill * 100) + ' %'
       O(eAbs, tw(t, at(4, 'Absorption'), 0.3)); O(eRule, tw(t, at(4, 'boit') - 0.3, 0.4))

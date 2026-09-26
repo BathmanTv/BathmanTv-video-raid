@@ -14,7 +14,7 @@ contact et son rapport de livraison).
 | 0:00 | Carton d'intro | Gideon au diner, « Vashnik le Malveillant », Mythique, phase unique, 2·4·14, Héroïsme au pull |
 | 0:08 | Accroche | Gideon face caméra, encart « Le combat » → « Tenir une rotation » |
 | 0:16 | La salle | Le plan de salle dans l'encart, les trois fontaines s'allument quand elles sont nommées, puis le plan passe en plein écran ; la Cavité malveillante |
-| 0:29 | Absorption | La barre d'énergie se remplit, Vashnik (render du gnome) entre et boit aux deux fontaines les plus proches |
+| 0:29 | Absorption | La barre d'énergie se remplit, Vashnik entre (médaillon sur le plan, carte du boss à droite) et boit aux deux fontaines les plus proches |
 | 0:38 | Rotation | Sang+Ombre → Ombre+Flamme → Flamme+Sang, le boss se déplace, la Vapeur toxique compte ses piles |
 | 0:46 | Les venins | Les venins rampent vers la Cavité : 1 = survivable, 2 = WIPE ; le venin durci après 60 s |
 | 1:07 | Les trois venins | Face caméra + vignettes : le Sang se divise, l'Ombre (5, voile = 100 % des PV, flaques loin du raid), la Flamme (on contrôle le premier, on tue le second), puis Gideon « chut » : « Jamais les deux ensemble » |
@@ -82,4 +82,4 @@ La version express ne cite pas ce chiffre à l'oral.
 - `vo/script.json`, `vo/build_vo.py`, `vo/out/` : voix off et table des temps
 - `mix.py` : bande-son
 - `render.mjs` : rendu Chromium + ffmpeg (moteur du showreel hauserjean-site)
-- `assets/img/` : Gideon détouré, Vashnik (render gnome détouré), l'ingénieur détouré, le diner, « chut »
+- `assets/img/` : Gideon détouré, Vashnik (image du boss et médaillon centré sur la tête), l'ingénieur détouré, le diner, « chut »
